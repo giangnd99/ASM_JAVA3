@@ -1,4 +1,4 @@
-package controller;
+package controller.admin.newsletter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

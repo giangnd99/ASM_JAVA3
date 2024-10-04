@@ -1,4 +1,4 @@
-package controller;
+package controller.admin.news;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,10 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/user")
-public class UserManage extends HttpServlet {
+@WebServlet("/news")
+public class NewsManage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/usermanage.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/newsmanage.jsp").forward(request, response);
+
 
     }
 }

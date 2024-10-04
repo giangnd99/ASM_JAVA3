@@ -1,5 +1,4 @@
-package controller;
-
+package controller.admin.category;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,10 +7,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/listnews")
-public class ListNews extends HttpServlet {
+@WebServlet("/category")
+public class CategoryManage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/listnews.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/categorymanage.jsp").forward(request, response);
+        request.getRequestURI();
+
     }
 }
 
