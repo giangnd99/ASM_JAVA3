@@ -13,20 +13,20 @@
     </style>
 </head>
 <body>
-<jsp:include page="/views/adminnavbar.jsp" />
+<jsp:include page="adminnavbar.jsp" />
 <div class="container content">
     <c:choose>
         <c:when test="${action eq 'manageUsers'}">
-            <jsp:include page="/views/usermanage.jsp" />
+            <jsp:include page="usermanage.jsp" />
         </c:when>
         <c:when test="${action eq 'manageNews'}">
-            <jsp:include page="/views/newsmanage.jsp" />
+            <jsp:include page="newsmanage.jsp" />
         </c:when>
         <c:when test="${action eq 'manageCategory'}">
-            <jsp:include page="/views/categorymanage.jsp" />
+            <jsp:include page="categorymanage.jsp" />
         </c:when>
         <c:when test="${action eq 'manageNewsletter'}">
-            <jsp:include page="/admin/newslettermanage.jsp" />
+            <jsp:include page="newslettermanage.jsp" />
         </c:when>
         <c:otherwise>
             <p>Chọn một chức năng từ menu để quản lý.</p>
@@ -35,6 +35,6 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<jsp:include page="/views/admin/adminfooter.jsp" />
+<jsp:include page="adminfooter.jsp" />
 </body>
 </html>
