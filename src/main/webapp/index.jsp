@@ -15,7 +15,7 @@
         <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h5>BAI VIET MOI NHAT</h5>
+                    <h5>Bài viết mới nhất</h5>
                 </div>
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -60,7 +60,7 @@
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h5>TIN MỚI</h5>
+                    <h5>Tin đáng chú ý</h5>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">5 BAI DC XEM NHIEU NHAT<span class="badge bg-primary float-end"> New</span></li>
