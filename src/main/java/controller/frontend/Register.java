@@ -17,10 +17,13 @@ public class Register extends HttpServlet {
 
         UserService userService = new UserService(request, response);
         try {
-            userService.createUser();
+            userService.showRegisterForm();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }
 

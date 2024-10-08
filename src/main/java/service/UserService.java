@@ -1,13 +1,14 @@
 package service;
 
+import controller.frontend.HomePage;
 import dao.impl.UserDAO;
-import model.Users;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import util.JwtUtil;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Users;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import util.JwtUtil;
 import util.ServletUtil;
 
 import java.io.IOException;
@@ -45,7 +46,11 @@ public class UserService {
         servletUtil.forwardToPage("/admin/user_list.jsp");
     }
 
+    public void showRegisterForm() throws ServletException, IOException {
+        servletUtil.forwardToPage("/frontend/register.jsp");
+    }
     public void createUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+
         String email = request.getParameter("email");
         String fullName = request.getParameter("fullname");
         String password = request.getParameter("password");
@@ -54,7 +59,7 @@ public class UserService {
 
         if (existingUser != null) {
             servletUtil.setErrorMessage("Không thể tạo tài khoản. Đã có một tài khoản có email " + email);
-            servletUtil.forwardToPage("/admin/message.jsp");
+            servletUtil.forwardToPage("/common/message.jsp");
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodedPassword = encoder.encode(password);
@@ -101,7 +106,13 @@ public class UserService {
         listUsers("User has been deleted successfully");
     }
 
-    public void login() throws Exception {
+    public void showLogin() throws Exception {
+        String loginPage = "/frontend/login.jsp";
+        servletUtil.forwardToPage(loginPage);
+    }
+
+    public void doLogin() throws Exception {
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
@@ -112,19 +123,21 @@ public class UserService {
             // So sánh mật khẩu nhập vào với mật khẩu đã mã hóa
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             loginResult = passwordEncoder.matches(password, user.getPassword());
-        }
 
-        if (loginResult) {
+
+            if (loginResult) {
             String token = jwtUtil.generateToken(email); // Tạo JWT
             request.getSession().setAttribute("useremail", email);
             request.getSession().setAttribute("token", token); // Lưu token vào session
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/index.jsp");
-            dispatcher.forward(request, response);
+                HomePage homePage = new HomePage();
+                homePage.doGet(request, response);
         } else {
             String message = "Login failed!";
             request.setAttribute("message", message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/login.jsp");
             dispatcher.forward(request, response);
-        }    }
+            }
+        }
+    }
 }
