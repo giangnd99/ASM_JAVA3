@@ -1,8 +1,6 @@
 package dao;
 
 
-import exception.UserNotFoundException;
-
 import java.util.List;
 
 public interface InterfaceDAO <T>{
@@ -10,7 +8,7 @@ public interface InterfaceDAO <T>{
 
     T update(T t);
 
-    T get(Integer id) throws UserNotFoundException;
+    T get(Integer id);
 
     boolean remove(Integer id);
 
