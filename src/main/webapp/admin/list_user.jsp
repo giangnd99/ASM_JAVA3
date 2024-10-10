@@ -13,7 +13,7 @@
 <body>
 <div class="container">
     <h2>Quản lý người dùng</h2>
-    <form action="UserServlet?action=create" method="post">
+    <form action="" method="post">
         <label for="username">Tên đăng nhập:</label>
         <input type="text" id="username" name="username" required>
 

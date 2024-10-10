@@ -12,7 +12,7 @@ public class Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        request.setAttribute("action", action); // Gán tham số action vào request
-        request.getRequestDispatcher("/views/admin.jsp").forward(request, response);
+        request.setAttribute("action", action);
+        request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
     }
 }

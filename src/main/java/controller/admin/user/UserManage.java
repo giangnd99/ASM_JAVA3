@@ -4,14 +4,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.UserService;
 
 import java.io.IOException;
 
-@WebServlet("/user")
+@WebServlet("/admin/user")
 public class UserManage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/usermanage.jsp").forward(request, response);
-
+        UserService service = new UserService(request, response);
+        service.listUsers();
     }
 }
 

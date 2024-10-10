@@ -43,7 +43,7 @@ public class UserService {
             request.setAttribute("message", message);
         }
 
-        servletUtil.forwardToPage("/admin/user_list.jsp");
+        servletUtil.forwardToPage("/admin/usermanage.jsp");
     }
 
     public void showRegisterForm() throws ServletException, IOException {
@@ -133,10 +133,10 @@ public class UserService {
                 HomePage homePage = new HomePage();
                 homePage.doGet(request, response);
         } else {
-            String message = "Login failed!";
+            String message = "Đăng nhập thất bại!";
             request.setAttribute("message", message);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/login.jsp");
-            dispatcher.forward(request, response);
+            String messagePage = "/common/message.jsp";
+            servletUtil.forwardToPage(messagePage);
             }
         }
     }

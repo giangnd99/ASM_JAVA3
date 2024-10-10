@@ -15,7 +15,7 @@ public class UpdateNewsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         NewsService newsService = new NewsService(req,resp);
         try {
-            newsService.updateNews();
+            newsService.editNews();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
