@@ -2,114 +2,436 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Management</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <jsp:include page="layout/page_header.jsp">
+        <jsp:param name="title" value="Trang chủ tin tức"/>
+    </jsp:include>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f4f5f7;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        h1, h2 {
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        h1:hover, h2:hover {
+            color: #0056b3;
+        }
+
+        /* Card Styles */
+        .custom-card {
+            background-color: white; /* Set a white background for cards */
+            border-radius: 8px; /* Round the corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            transition: transform 0.3s ease-in-out;
+            overflow: hidden; /* Hide overflow for better layout */
+        }
+
+        .custom-card:hover {
+            transform: scale(1.03); /* Slightly scale on hover */
+        }
+
+        .card-title, .text-primary {
+            color: #ff6347 !important;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .card-title:hover {
+            color: #e60023;
+        }
+
+        .card-text {
+            color: #5a5a5a;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            position: relative;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #138496;
+            transform: scale(1.05);
+        }
+
+        /* Image Styles */
+        img {
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Specific Styles for News Card */
+        .custom-card {
+            height: auto; /* Auto height to fit content */
+            max-height: 120px; /* Maximum height of the card */
+        }
+
+        .custom-card img {
+            height: 80px; /* Set image height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .custom-card .card-body {
+            padding: 10px; /* Reduce padding */
+        }
+
+        .custom-card .card-title {
+            font-size: 16px; /* Title size */
+            margin-bottom: 5px; /* Margin below title */
+        }
+
+        .custom-card .card-text {
+            font-size: 14px; /* Summary text size */
+            line-height: 1.2; /* Line height */
+            height: 50px; /* Max height for text */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        .custom-card .btn {
+            font-size: 12px; /* Button text size */
+            padding: 5px 10px; /* Button padding */
+        }
+
+        /* News Card Specific Styles */
+        .news-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0; /* Round top corners */
+        }
+
+        .news-card h4 {
+            font-size: 1.2rem; /* Title size */
+            margin: 10px 0; /* Margin above and below */
+            color: #333; /* Title color */
+        }
+
+        .news-card p {
+            font-size: 0.9rem; /* Summary text size */
+            color: #777; /* Summary text color */
+        }
+
+        /* Read More Button Styles */
+        .read-more-btn {
+            display: inline-block;
+            padding: 8px 12px; /* Button padding */
+            margin-top: 10px; /* Margin above button */
+            background-color: #007bff; /* Button color */
+            color: white; /* Text color */
+            border-radius: 4px; /* Round corners */
+            text-transform: uppercase; /* Uppercase text */
+            transition: background-color 0.3s ease; /* Transition for background */
+        }
+
+        .read-more-btn:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
 </head>
 <body>
-<jsp:include page="layout/navbar.jsp"/>
-<div class="container mt-4">
+<div class="container-lg">
+    <jsp:include page="layout/header.jsp"></jsp:include>
+    <h1 class="text-center my-4">Trang Chủ Tin Tức</h1>
+
     <div class="row">
+        <!-- Main Content Area -->
         <div class="col-md-8">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5>BAI VIET MOI NHAT</h5>
-                </div>
-                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <jsp:include page="layout/slider.jsp"/>
+
+            <!-- Newest News Section -->
+            <h2 class="my-4 text-center">Tin tức mới</h2>
+            <div class="row">
+                <%-- Loop to display latest news --%>
+                <%-- <c:forEach items="${listLatestNews}" var="news"> --%>
+                <div class="col-md-12 mb-3 custom-card d-flex align-items-start">
+                    <div class="me-3">
+                        <%-- News Image --%>
+                        <img src="images/news8.jpg" alt="News Image" class="img-fluid rounded"
+                             style="width: 150px; height: 100px;">
+                        <%-- ${news.image} --%>
                     </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="${pageContext.request.contextPath}/images/post2.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img src="${pageContext.request.contextPath}/images/post1.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="${pageContext.request.contextPath}/images/post3.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                        </div>
+                    <div class="flex-grow-1">
+                        <%-- News Title --%>
+                        <h5><a href="frontend/news/news_detail?id=" class="text-primary">Tiêu đề tin tức 1</a></h5>
+                        <%-- ${news.title} --%>
+                        <%-- News Summary --%>
+                        <p class="mb-2">Nội dung tóm tắt...</p>
+                        <%-- ${fn:substring(news.content, 0, 100)}... --%>
+                        <%-- Post Date and Author --%>
+                        <small class="text-muted">Ngày đăng: 28/09/2024 | Tác giả: Nguyễn Đằng Giang</small>
+                        <%-- ${news.posted_date} | ${news.author_name} --%>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
+                <div class="col-md-12 mb-3 custom-card d-flex align-items-start">
+                    <div class="me-3">
+                        <%-- News Image --%>
+                        <img src="images/news8.jpg" alt="News Image" class="img-fluid rounded"
+                             style="width: 150px; height: 100px;">
+                        <%-- ${news.image} --%>
+                    </div>
+                    <div class="flex-grow-1">
+                        <%-- News Title --%>
+                        <h5><a href="frontend/news/news_detail?id=" class="text-primary">Tiêu đề tin tức 2</a></h5>
+                        <%-- ${news.title} --%>
+                        <%-- News Summary --%>
+                        <p class="mb-2">Nội dung tóm tắt...</p>
+                        <%-- ${fn:substring(news.content, 0, 100)}... --%>
+                        <%-- Post Date and Author --%>
+                        <small class="text-muted">Ngày đăng: 28/09/2024 | Tác giả: Nguyễn Đằng Giang</small>
+                        <%-- ${news.posted_date} | ${news.author_name} --%>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3 custom-card d-flex align-items-start">
+                    <div class="me-3">
+                        <%-- News Image --%>
+                        <img src="${pageContext.request.contextPath}/images/news8.jpg" alt="News Image" class="img-fluid rounded"
+                             style="width: 150px; height: 100px;">
+                        <%-- ${news.image} --%>
+                    </div>  
+                    <div class="flex-grow-1">
+                        <%-- News Title --%>
+                        <h5><a href="frontend/news/news_detail?id=" class="text-primary">Tiêu đề tin tức 3</a></h5>
+                        <%-- ${news.title} --%>
+                        <%-- News Summary --%>
+                        <p class="mb-2">Nội dung tóm tắt...</p>
+                        <%-- ${fn:substring(news.content, 0, 100)}... --%>
+                        <%-- Post Date and Author --%>
+                        <small class="text-muted">Ngày đăng: 28/09/2024 | Tác giả: Nguyễn Đằng Giang</small>
+                        <%-- ${news.posted_date} | ${news.author_name} --%>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3 custom-card d-flex align-items-start">
+                    <div class="me-3">
+                        <%-- News Image --%>
+                        <img src="images/news8.jpg" alt="News Image" class="img-fluid rounded"
+                             style="width: 150px; height: 100px;">
+                        <%-- ${news.image} --%>
+                    </div>
+                    <div class="flex-grow-1">
+                        <%-- News Title --%>
+                        <h5><a href="frontend/news/news_detail?id=" class="text-primary">Tiêu đề tin tức 4</a></h5>
+                        <%-- ${news.title} --%>
+                        <%-- News Summary --%>
+                        <p class="mb-2">Nội dung tóm tắt...</p>
+                        <%-- ${fn:substring(news.content, 0, 100)}... --%>
+                        <%-- Post Date and Author --%>
+                        <small class="text-muted">Ngày đăng: 28/09/2024 | Tác giả: Nguyễn Đằng Giang</small>
+                        <%-- ${news.posted_date} | ${news.author_name} --%>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3 custom-card d-flex align-items-start">
+                    <div class="me-3">
+                        <%-- News Image --%>
+                        <img src="images/news8.jpg" alt="News Image" class="img-fluid rounded"
+                             style="width: 150px; height: 100px;">
+                        <%-- ${news.image} --%>
+                    </div>
+                    <div class="flex-grow-1">
+                        <%-- News Title --%>
+                        <h5><a href="frontend/news/news_detail?id=" class="text-primary">Tiêu đề tin tức 5</a></h5>
+                        <%-- ${news.title} --%>
+                        <%-- News Summary --%>
+                        <p class="mb-2">Nội dung tóm tắt...</p>
+                        <%-- ${fn:substring(news.content, 0, 100)}... --%>
+                        <%-- Post Date and Author --%>
+                        <small class="text-muted">Ngày đăng: 28/09/2024 | Tác giả: Nguyễn Đằng Giang</small>
+                        <%-- ${news.posted_date} | ${news.author_name} --%>
+                    </div>
+                </div>
+
+                <%-- </c:forEach> --%>
             </div>
         </div>
+
+        <!-- Sidebar Section -->
         <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5>TIN MỚI</h5>
+            <!-- Recent News Section -->
+            <section class="mb-5">
+                <h2 class="text-center">Tin tức gần đây</h2>
+                <div class="row">
+                    <%-- Loop for recent news --%>
+                    <%-- <c:forEach items="${list5LatestNews}" var="news"> --%>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news3.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 1</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news3.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 2</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news3.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 3</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news3.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 4</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news3.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 5</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- </c:forEach> --%>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">5 BAI DC XEM NHIEU NHAT<span class="badge bg-primary float-end"> New</span></li>
-                    <li class="list-group-item">5 BÀI TIN MƠ NHẤT <span class="badge bg-primary float-end"> New</span></li>
-                    <li class="list-group-item">5 BẢN TIN GẦN NHẤT ĐÃ XEM <span class="badge bg-primary float-end"> New</span></li>
-                </ul>
-            </div>
+            </section>
+
+            <!-- Trending News Section -->
+            <section class="mb-5">
+                <h2 class="text-center">Tin tức nhiều người xem</h2>
+                <div class="row">
+                    <%-- <c:forEach items="${list5TrendingNews}" var="news"> --%>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news5.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 1</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news5.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 2</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news5.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 3</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news5.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 4</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news5.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 5</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- </c:forEach> --%>
+                </div>
+            </section>
+
+            <!-- Recently Viewed News Section -->
+            <section class="mb-5">
+                <h2 class="text-center">Tin tức đã xem</h2>
+                <div class="row">
+                    <%-- <c:forEach items="${list5CurrentNews}" var="news"> --%>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news7.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 1</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news7.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 2</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news7.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 3</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news7.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 4</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card custom-card">
+                            <img class="card-img-top" src="images/news7.jpg" alt="News Image" style="height: 80px;">
+                            <div class="card-body">
+                                <a href="frontend/news/news-detail.jsp" class="btn btn-primary"><h5 class="card-title">Tiêu
+                                    đề tin tức 5</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- </c:forEach> --%>
+                </div>
+            </section>
         </div>
     </div>
 </div>
-<div class="container mt-5">
-    <!-- Danh sách các bài viết liên quan ở dưới (thêm) -->
-    <div class="mt-5">
-        <h3 class="mb-4">Bài viết khác bạn có thể thích</h3>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150x100" class="card-img-top" alt="Bài viết 4">
-                    <div class="card-body">
-                        <h5 class="card-title">Tiêu đề bài viết 4</h5>
-                        <p class="card-text">Mô tả ngắn cho bài viết 4.</p>
-                        <a href="#" class="btn btn-primary btn-sm">Xem chi tiết</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150x100" class="card-img-top" alt="Bài viết 5">
-                    <div class="card-body">
-                        <h5 class="card-title">Tiêu đề bài viết 5</h5>
-                        <p class="card-text">Mô tả ngắn cho bài viết 5.</p>
-                        <a href="#" class="btn btn-primary btn-sm">Xem chi tiết</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150x100" class="card-img-top" alt="Bài viết 6">
-                    <div class="card-body">
-                        <h5 class="card-title">Tiêu đề bài viết 6</h5>
-                        <p class="card-text">Mô tả ngắn cho bài viết 6.</p>
-                        <a href="#" class="btn btn-primary btn-sm">Xem chi tiết</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Advertisement Section -->
-<jsp:include page="layout/footer.jsp"></jsp:include>
+
+<jsp:include page="layout/footer.jsp"/>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>

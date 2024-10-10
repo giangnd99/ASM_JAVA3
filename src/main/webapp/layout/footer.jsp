@@ -1,114 +1,95 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lam
-  Date: 25/09/2024
-  Time: 12:49 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <style>
-    #subscribe {
-        margin: 50px;
-    }
-    #subscribe .subscribe-content {
-        background-image: url("${pageContext.request.contextPath}/images/subscribtionimg.jpg");
-        width: 100%;
-        height: 350px;
-        background-size: cover; /* Thêm thuộc tính này để ảnh lấp đầy toàn bộ khu vực */
-    }
-    #subscribe .subscribe-content .entry-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%; /* Điều chỉnh chiều cao để căn giữa nội dung */
-        color: #ffffff;
-    }
-    #subscribe .subscribe-content .section-header {
-        width: 45%;
-        margin-right: 60px;
-    }
-    #subscribe .subscribe-content .section-title {
-        line-height: 1.1;
-        color: #ffffff;
-    }
-    #subscribe .subscribe-content p {
-        font-size: 1.4em;
-        font-family: 'Playfair Display';
-    }
-    form#form {
-        width: 371px;
-    }
-    form#form input[type="text"] {
-        width: 100%;
-        height: 44px;
-        margin-bottom: 15px;
-        text-align: center;
-        border: none;
-    }
-    form#form button {
-        width: 100%;
-        height: 44px;
-        border: none;
-        background: #000;
+    .footer {
+        background: linear-gradient(135deg, #4b79a1, #283e51);
         color: #fff;
-        font-weight: 600;
-        cursor: pointer;
+        padding: 40px 0;
     }
-    form#form button:hover {
-        background: #e9663c;
+    .footer h5 {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
-    @media (max-width: 1100px) {
-        #subscribe .subscribe-content .entry-content {
-            width: 100%;
-        }
+    .footer p {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
     }
-    @media (max-width: 930px) {
-        #subscribe .subscribe-content .entry-content {
-            flex-wrap: wrap;
-            text-align: center;
-            margin: 80px auto;
-        }
-        #subscribe .subscribe-content .section-header {
-            width: 100%;
-            margin: 20px 60px;
-        }
+    .footer .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
     }
-    @media (max-width: 800px) {
-        #subscribe .subscribe-content .entry-content {
-            margin: 50px auto;
-        }
-        #subscribe .section-title {
-            font-size: 2.5em;
-        }
+    .footer .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
     }
-    @media (max-width: 600px) {
-        #subscribe .section-title {
-            font-size: 2em;
-        }
+    .footer .text-muted {
+        opacity: 0.8;
     }
-    .navbar-nav {
+    .footer .social-links i {
+        font-size: 1.5rem;
+        margin: 0 10px;
+        color: #fff;
+    }
+    .footer .social-links i:hover {
+        color: #f9c74f;
+    }
+    .footer .navigation-links a {
+        color: #f9c74f;
+        margin: 0 10px;
+    }
+    .footer .navigation-links a:hover {
+        text-decoration: underline;
     }
 </style>
-<section id="subscribe">
+<footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="subscribe-content">
-                <div class="entry-content">
-                    <div class="section-header">
-                        <h2 class="section-title">Subscribe us for more life transforming tips and articles</h2>
-                        <p>Subscribe us for more life transforming tips</p>
-                    </div>
-                    <form id="form">
-                        <input type="text" name="name" placeholder="Name">
-                        <input type="text" name="email" placeholder="Email Address">
-                        <button id="button">Send me the link</button>
-                    </form>
-                </div><!--text-block-->
+        <div class="row align-items-center">
+            <!-- Left Section: Logo and Editor Information -->
+            <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                <img src="${pageContext.request.contextPath}/images/FPT_Polytechnic.png" alt="Company Logo" class="mb-2" style="max-width: 150px;">
+                <p class="mb-1">Tổng biên tập: <strong>Thầy Vỹ</strong></p>
+                <p class="mb-1">Thông tin tòa soạn - FPT</p>
+            </div>
+
+            <!-- Center Section: Email Subscription Form -->
+            <div class="col-md-4 text-center">
+                <h5 class="mb-2">Đăng ký nhận tin tức mới nhất</h5>
+                <form action="subscribe" method="post" class="d-flex justify-content-center">
+                    <input type="email" name="email" class="form-control me-2" placeholder="Nhập email của bạn" required />
+                    <button type="submit" class="btn btn-success">Nhận Tin</button>
+                </form>
+                <small class="text-muted">Đọc giả có thể điền email để nhận thông tin mới nhất.</small>
+            </div>
+
+            <!-- Right Section: Contact Information -->
+            <div class="col-md-4 text-center text-md-end">
+                <p class="mb-1">Địa chỉ: <strong> Đ.Tô Ký, P.1, Q.12, Tp. Hồ Chí Minh</strong></p>
+                <p class="mb-1">Hotline: <strong>0918.033.133</strong> - Email: <strong>giangndps38221@fpt.edu.vn</strong></p>
+                <p class="mb-1">Phòng Báo Công Nghệ: <strong>0123455231</strong></p>
+                <a href="#" class="d-block mt-2 text-decoration-none">
+                    <button class="btn btn-primary">Đăng ký tại đây</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Social Links and Navigation -->
+        <div class="row mt-4">
+            <div class="col text-center">
+                <div class="mb-2 navigation-links">
+                    <a href="#" class="text-muted me-3">Trang chủ</a>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="me-3 text-muted"><i class="bi bi-facebook fs-4"></i></a>
+                    <a href="#" class="text-muted"><i class="bi bi-youtube fs-4"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright Information -->
+        <div class="row mt-4">
+            <div class="col text-center text-muted">
+                <hr>
+                <p class="mb-0">© Copyright 2024 FPT-Polytechnic Co., Ltd. All rights reserved.</p>
             </div>
         </div>
     </div>
-</section>
-<!-- Footer -->
-<footer class="text-center py-4">
-    <p>&copy; 2024 News Management. All rights reserved.</p>
 </footer>
