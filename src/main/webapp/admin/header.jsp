@@ -63,16 +63,16 @@
             </form>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="view_news" class="nav-link">Newsletter</a>
+                    <a href="admin/list_newsletter" class="nav-link">Newsletter</a>
                 </li>
                 <li class="nav-item">
-                    <a href="list_news" class="nav-link">Quản Lý Tin Tức</a>
+                    <a href="admin/list_news" class="nav-link">Quản Lý Tin Tức</a>
                 </li>
                 <li class="nav-item">
-                    <a href="view_users" class="nav-link">Quản Lý Người Dùng</a>
+                    <a href="admin/list_users" class="nav-link">Quản Lý Người Dùng</a>
                 </li>
                 <li class="nav-item">
-                    <a href="view_reports" class="nav-link">Thống Kê</a>
+                    <a href="admin/list_reports" class="nav-link">Thống Kê</a>
                 </li>
                 <li class="nav-item">
                     <a href="logout" class="nav-link">Đăng Xuất</a>
@@ -87,25 +87,3 @@
     </div>
 </nav>
 
-<div class="my-4"></div>
-
-<!-- Categories Section (Optional for Admin) -->
-<div class="container mb-4">
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <a href="view_category?id=1" class="category-link btn btn-outline-primary mx-1">Java</a>
-        </div>
-        <div class="col-auto">
-            <a href="view_category?id=2" class="category-link btn btn-outline-primary mx-1">Java Frameworks</a>
-        </div>
-        <div class="col-auto">
-            <a href="view_category?id=3" class="category-link btn btn-outline-primary mx-1">Spring Framework</a>
-        </div>
-        <div class="col-auto">
-            <a href="view_category?id=4" class="category-link btn btn-outline-primary mx-1">Hibernate</a>
-        </div>
-        <div class="col-auto">
-            <a href="view_category?id=5" class="category-link btn btn-outline-primary mx-1">Microservices</a>
-        </div>
-    </div>
-</div>

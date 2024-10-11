@@ -9,14 +9,18 @@ import service.CategoryService;
 
 import java.io.IOException;
 
-@WebServlet
+@WebServlet("/admin/update_category")
 public class UpdateCategoryServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CategoryService categoryService = new CategoryService(req, resp);
+        categoryService.editCategory();
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         CategoryService categoryService = new CategoryService(req, resp);
         categoryService.updateCategory();
     }

@@ -2,6 +2,7 @@ package service;
 
 import dao.impl.CategoryDAO;
 import dao.impl.NewsDAO;
+import dao.impl.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -10,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import model.Category;
 import model.News;
-import util.ServletUtil;
+import model.Users;
 import util.XImage;
 
 import java.io.File;
@@ -24,43 +25,51 @@ import java.util.List;
 
 @MultipartConfig
 public class NewsService {
+
     private NewsDAO newsDAO;
     private CategoryDAO categoryDAO;
+    private UserDAO userDAO;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private ServletUtil servletUtil;
 
     public NewsService(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
         newsDAO = new NewsDAO();
         categoryDAO = new CategoryDAO();
-        servletUtil = new ServletUtil(request, response);
+        userDAO = new UserDAO();
+
     }
 
-    public void listNews() throws ServletException, IOException {
+    public void listNews() throws Exception {
         listNews(null);
     }
 
-    public void listNews(String message) throws ServletException, IOException {
+    public void listNews(String message) throws Exception {
         List<News> listNews = newsDAO.listAll();
+        List<Users> listUser = userDAO.findAll();
         request.setAttribute("listNews", listNews);
+        request.setAttribute("listUser", listUser);
 
         if (message != null) {
-            servletUtil.setErrorMessage(message);
+            request.setAttribute("message", message);
         }
 
-        String listPage = "news_list.jsp";
-        servletUtil.forwardToPage(listPage);
+        String listPage = "/admin/news/list_news.jsp";
+        request.getRequestDispatcher(listPage).forward(request, response);
     }
 
-    public void showNewsNewForm() throws ServletException, IOException {
+    public void showNewsNewForm() throws Exception {
         List<Category> listCategory = categoryDAO.listAll();
+        List<Users> listUser = userDAO.findAll();
+        News news = null;
+        request.setAttribute("news", news);
         request.setAttribute("listCategory", listCategory);
+        request.setAttribute("listUser", listUser);
         request.setAttribute("pageTitle", "Create New News");
 
-        String newPage = "news_form.jsp";
-        servletUtil.forwardToPage(newPage);
+        String newPage = "/admin/news/create_news.jsp";
+        request.getRequestDispatcher(newPage).forward(request, response);
     }
 
     public void createNews() throws Exception {
@@ -86,6 +95,7 @@ public class NewsService {
     }
 
     public void readNewsFields(News news) throws ServletException, IOException {
+
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -102,16 +112,19 @@ public class NewsService {
         news.setContent(content);
         news.setPostedDate(postedDate);
 
-        Integer categoryId = Integer.parseInt(request.getParameter("category"));
+        Integer categoryId = Integer.parseInt(request.getParameter("category_id"));
         Category category = categoryDAO.get(categoryId);
         news.setCategoryId(category.getId());
+
+        int authorId = Integer.parseInt(request.getParameter("author"));
+        news.setAuthor(authorId);
 
         // Xử lý ảnh, nếu cần
         File fileSaveDir = new File(request.getServletContext().getRealPath("/newsImages"));
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
         }
-        Part part = request.getPart("newsImage");
+        Part part = request.getPart("image");
         String fileName = part.getSubmittedFileName();
         if (fileName != null && !fileName.isEmpty()) {
             XImage.saveFile(part, fileSaveDir.getAbsolutePath());
@@ -119,40 +132,39 @@ public class NewsService {
         }
     }
 
-    public void editNews() throws ServletException, IOException {
+    public void editNews() throws Exception {
         Integer newsId = Integer.parseInt(request.getParameter("id"));
         News news = newsDAO.get(newsId);
         List<Category> listCategory = categoryDAO.listAll();
+        List<Users> listUser = userDAO.findAll();
 
         request.setAttribute("news", news);
+        request.setAttribute("listUser", listUser);
         request.setAttribute("listCategory", listCategory);
 
-        String editPage = "news_form.jsp";
-        servletUtil.forwardToPage(editPage);
+        String editPage = "/admin/news/update_news.jsp";
+        request.getRequestDispatcher(editPage).forward(request, response);
     }
 
     public void updateNews() throws Exception {
-        String id = request.getParameter("newsId");
-        Integer newsId = Integer.valueOf(id);
+        int newsId = Integer.parseInt(request.getParameter("newsId"));
         String title = request.getParameter("title");
 
         News existNews = newsDAO.get(newsId);
         News newsByTitle = newsDAO.findByTitle(title);
 
-        if (newsByTitle != null && !existNews.equals(newsByTitle)) {
-            String message = "Không thể cập nhật tin này! bạn hãy chọn tiêu đề đọc quyền của mình.";
+        if (newsByTitle == null && existNews.equals(newsByTitle)) {
+            String message = "Không thể cập nhật tin này! tin này chưa từng có trên trang đọc quyền của mình.";
             listNews(message);
             return;
         }
-
         readNewsFields(existNews);
         newsDAO.update(existNews);
-
-        String message = "Tin tức của bạn đã được xuất bản lên trang web! Cảm ơn bạn.";
+        String message = "Tin tức của bạn đã được cập nhật lên trang web! Cảm ơn bạn.";
         listNews(message);
     }
 
-    public void deleteNews() throws ServletException, IOException {
+    public void deleteNews() throws Exception {
         Integer newsId = Integer.parseInt(request.getParameter("id"));
         newsDAO.remove(newsId);
 
@@ -166,8 +178,8 @@ public class NewsService {
 
         request.setAttribute("news", news);
 
-        String detailPage = "frontend/news_detail.jsp";
-        servletUtil.forwardToPage(detailPage);
+        String detailPage = "/frontend/news_detail.jsp";
+        request.getRequestDispatcher(detailPage).forward(request, response);
     }
 
     public void search() throws ServletException, IOException {
@@ -221,4 +233,3 @@ public class NewsService {
         return matchedNews; // Trả về danh sách tin tức khớp với từ khóa
     }
 }
-

@@ -7,12 +7,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/newsletter")
+@WebServlet("/admin/list_newsletter")
 public class NewsletterManage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/newslettermanage.jsp").forward(request, response);
-
-
+        request.getRequestDispatcher("/admin/list_newsletter.jsp").forward(request, response);
     }
 }
 

@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.CategoryService;
 
-@WebServlet
+@WebServlet("/admin/delete_category")
 public class DeleteCategoryServlet extends HttpServlet {
 
     @Override

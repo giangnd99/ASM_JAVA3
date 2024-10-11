@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Quản lý user</title>
@@ -41,13 +44,21 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="user" items="${userList}">
+        <%--        private Integer id;--%>
+        <%--        private String fullname;--%>
+        <%--        private String password;--%>
+        <%--        private String email;--%>
+        <%--        private String phone;--%>
+        <%--        private Date birthday;--%>
+        <%--        private boolean gender;--%>
+        <%--        private boolean role;--%>
+        <c:forEach var="user" items="${listUsers}">
             <tr>
-                <td>${user.username}</td>
+                <td>${user.fullname}</td>
                 <td>${user.email}</td>
                 <td>${user.role}</td>
-                <td><a href="UserServlet?action=edit&id=${user.id}">Sửa</a></td>
-                <td><a href="UserServlet?action=delete&id=${user.id}">Xóa</a></td>
+                <td><a href="update_user?id=${user.id}">Sửa</a></td>
+                <td><a href="delete_user?id=${user.id}">Xóa</a></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -2,7 +2,6 @@ package service;
 
 import dao.impl.CategoryDAO;
 import dao.impl.NewsDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CategoryService {
+
     private CategoryDAO categoryDAO;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -43,6 +43,15 @@ public class CategoryService {
 
     public void listCategory() throws ServletException, IOException {
         listCategory(null);
+    }
+
+    public void showCategoryNewForm() throws ServletException, IOException {
+        List<Category> listCategory = categoryDAO.listAll();
+        request.setAttribute("listCategory", listCategory);
+        request.setAttribute("pageTitle", "Create New News");
+
+        String newPage = "category_form.jsp";
+        servletUtil.forwardToPage(newPage);
     }
 
     public void createCategory() throws ServletException, IOException {
@@ -118,4 +127,3 @@ public class CategoryService {
     }
 
 }
-
