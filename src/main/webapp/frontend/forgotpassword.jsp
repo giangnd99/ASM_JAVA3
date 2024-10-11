@@ -1,33 +1,51 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lam
-  Date: 23/09/2024
-  Time: 11:52 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!-- forgot-password.jsp -->
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>ForgotPassword</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+        .forgot-password-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .forgot-password-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<form method="post" action="Forgotpassword">
-    <div class="card text-center" style="width:50%;">
-        <div class="card-header h5 text-white bg-primary">Password Reset</div>
-        <div class="card-body px-5">
-            <p class="card-text py-2">
-                Enter your email address and we'll send you an email with instructions to reset your password.
-            </p>
-            <div data-mdb-input-init class="form-outline">
-                <input type="email" id="typeEmail" class="form-control my-3" />
-                <label class="form-label" for="typeEmail">Email input</label>
-            </div>
-            <a href="#" data-mdb-ripple-init class="btn btn-primary w-100">Reset password</a>
-            <div class="d-flex justify-content-between mt-4">
-            </div>
+
+<div class="forgot-password-container">
+    <h2>Quên Mật Khẩu</h2>
+    <form action="forgot-password" method="post">
+        <div class="form-group">
+            <label for="email">Email của bạn</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Nhập địa chỉ email" required>
         </div>
-    </div>
-</form>
+        <button type="submit" class="btn btn-custom btn-block">Gửi yêu cầu</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

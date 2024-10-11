@@ -43,7 +43,7 @@ public class UserService {
             request.setAttribute("message", message);
         }
 
-        servletUtil.forwardToPage("/admin/user/list_user.jsp");
+        servletUtil.forwardToPage("/admin/user/list_users.jsp");
     }
 
     public void showRegisterForm() throws ServletException, IOException {

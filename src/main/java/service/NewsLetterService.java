@@ -43,7 +43,7 @@ public class NewsLetterService {
     public void showNewsletterNewForm() throws ServletException, IOException {
         request.setAttribute("pageTitle", "Create New Newsletter");
 
-        String newPage = "newsletter_form.jsp";
+        String newPage = "/admin/newsletter/list_newsletter.jsp";
         servletUtil.forwardToPage(newPage);
     }
 

@@ -66,6 +66,9 @@
                     <a href="admin/list_newsletter" class="nav-link">Newsletter</a>
                 </li>
                 <li class="nav-item">
+                    <a href="admin/category" class="nav-link">Quản Lý Loại Tin</a>
+                </li>
+                <li class="nav-item">
                     <a href="admin/list_news" class="nav-link">Quản Lý Tin Tức</a>
                 </li>
                 <li class="nav-item">

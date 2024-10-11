@@ -10,7 +10,7 @@ import java.io.IOException;
 @WebServlet("/forgotpassword")
 public class ForgotPassword extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/forgotpassword.jsp").forward(request, response);
+        request.getRequestDispatcher("/frontend/forgotpassword.jsp").forward(request, response);
     }
 }
 
