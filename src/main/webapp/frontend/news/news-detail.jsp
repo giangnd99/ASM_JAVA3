@@ -85,7 +85,7 @@
         <!-- Nội dung bài báo (80%) -->
         <section class="col-md-8">
             <article>
-                <h1>Tiêu đề bài báo: Những thay đổi về phiên bản JDK trong năm 2024</h1>
+                <h1>Tiêu đề bài báo: Những thay đổi về phiên bản JDK trong năm 2000000</h1>
                 <h3>Tác giả: ...</h3>
                 <h3>Ngày đăng: 25/09/2024</h3>
                 <img class="img-fluid" src="https://via.placeholder.com/800x400" alt="Hình ảnh bài báo">

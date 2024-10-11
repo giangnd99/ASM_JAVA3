@@ -43,7 +43,7 @@ public class UserService {
             request.setAttribute("message", message);
         }
 
-        servletUtil.forwardToPage("/admin/usermanage.jsp");
+        servletUtil.forwardToPage("/admin/user/list_user.jsp");
     }
 
     public void showRegisterForm() throws ServletException, IOException {
@@ -74,7 +74,7 @@ public class UserService {
         Users user = userDAO.get(userId);
 
         request.setAttribute("user", user);
-        servletUtil.forwardToPage("user_form.jsp");
+        servletUtil.forwardToPage("/admin/user/update_user.jsp");
     }
 
     public void updateUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {

@@ -10,6 +10,14 @@ public class XJdbc {
     static String USERNAME = "root";
     static String PASSWORD = "root";
 
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     /*
      * Nạp driver và lấy kết nối
      */
