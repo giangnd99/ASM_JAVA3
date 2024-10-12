@@ -44,7 +44,6 @@
 <div class="container-lg">
     <jsp:include page="../header.jsp"></jsp:include>
     <h1 class="text-center my-4">${news != null ? 'Chỉnh sửa bài' : 'Viết bài mới'}</h1>
-
     <!-- Form for Writing/Editing News -->
     <div class="container my-5">
         <div class="card p-4">

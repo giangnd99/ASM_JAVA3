@@ -32,7 +32,7 @@
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
 <div class="container-lg">
-    <h1 class="text-center my-4">Chỉnh sửa bài </h1>
+    <h1 class="text-center my-4">Bài viết mới</h1>
     <!-- Form for Writing News -->
     <div class="container my-5">
         <div class="card p-4">
