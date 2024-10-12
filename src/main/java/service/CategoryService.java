@@ -37,7 +37,7 @@ public class CategoryService {
             servletUtil.setErrorMessage(message);
         }
 
-        String listPage = "/admin/categorymanage.jsp";
+        String listPage = "/admin/category/list_category.jsp";
         servletUtil.forwardToPage(listPage);
     }
 

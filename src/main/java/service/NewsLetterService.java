@@ -36,14 +36,15 @@ public class NewsLetterService {
             servletUtil.setErrorMessage(message);
         }
 
-        String listPage = "newsletter_list.jsp";
+        String listPage = "/admin/newsletter/list_newsletter.jsp";
         servletUtil.forwardToPage(listPage);
     }
 
     public void showNewsletterNewForm() throws ServletException, IOException {
         request.setAttribute("pageTitle", "Create New Newsletter");
-
-        String newPage = "newsletter_form.jsp";
+        List<NewsLetter> listNewsletters = newsletterDAO.listAll();
+        request.setAttribute("listNewsletters", listNewsletters);
+        String newPage = "/admin/newsletter/list_newsletter.jsp";
         servletUtil.forwardToPage(newPage);
     }
 

@@ -1,117 +1,87 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <jsp:include page="../../layout/page_header.jsp">
-        <jsp:param name="title" value="Viết bài mới"/>
-    </jsp:include>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
             background-color: #f8f9fa;
         }
-
         h1 {
             color: #007bff;
         }
-
         .form-control, .form-select {
             border-radius: 0.5rem;
         }
-
         .btn-primary {
             background-color: #007bff;
             border: none;
         }
-
         .btn-secondary {
             background-color: #6c757d;
             border: none;
         }
-
         .card {
             border: none;
             border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"></jsp:include>
 <div class="container-lg">
-    <jsp:include page="../header.jsp"></jsp:include>
-    <h1 class="text-center my-4"> Viết bài mới</h1>
-
-    <!-- Form for Writing/Editing News -->
+    <h1 class="text-center my-4">Bài viết mới</h1>
+    <!-- Form for Writing News -->
     <div class="container my-5">
         <div class="card p-4">
-            <form action="${pageContext.request.contextPath}/admin/create_news" method="POST"
-                  enctype="multipart/form-data">
-                <input type="number" name="newsId" value="${news.id}" readonly>
+            <form action="submit_news" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label class="form-label">Tiêu đề</label>
-                    <input type="text" class="form-control" name="title" value="${news.title}" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Lượt xem</label>
-                    <input type="number" class="form-control" name="viewCount" value="${news.viewCount}" required>
+                    <label for="title" class="form-label">Tiêu đề</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Nội dung</label>
-                    <textarea class="form-control" name="content" rows="5" required>${news.content}</textarea>
+                    <label for="content" class="form-label">Nội dung</label>
+                    <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Hình ảnh</label>
-                    <input type="file" class="form-control" name="image">
-                    <c:if test="${news != null}">
-                        <img id="thumbnail" alt="Image Preview" style="width:20%; margin-top: 10px"
-                             src="${pageContext.request.contextPath}/newsImages/${news.image}"/>
-                    </c:if>
+                    <label for="image" class="form-label">Hình ảnh</label>
+                    <input type="file" class="form-control" id="image" name="image">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Danh mục</label>
-                    <select class="form-select" name="category_id" required>
-                        <c:forEach var="cat" items="${listCategory}">
-                            <option value="${cat.id}" ${news != null && cat.id == news.categoryId ? 'selected' : ''}>${cat.name}</option>
-                        </c:forEach>
+                    <label for="category" class="form-label">Danh mục</label>
+                    <select class="form-select" id="category" name="category_id" required>
+                        <option value="1">Công nghệ</option>
+                        <option value="2">Khoa học</option>
+                        <option value="3">Xã hội</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Tác giả</label>
-                    <select class="form-select" name="author" required>
-                        <c:forEach var="user" items="${listUser}">
-                            <option value="${user.id}" ${news != null && user.id == news.author ? 'selected' : ''}>${user.fullname}</option>
-                        </c:forEach>
+                    <label for="author" class="form-label">Tác giả</label>
+                    <select class="form-select" id="author" name="author_id" required>
+                        <option value="1">Nguyễn Văn A</option>
+                        <option value="2">Trần Thị B</option>
+                        <option value="3">Lê Văn C</option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Ngày đăng</label>
-                    <input type="date" name="postedDate" size="20" required class="form-control"
-                           value="<fmt:formatDate pattern='yyyy-MM-dd' value='${news.postedDate}' />"/>
-                </div>
+
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="home"
-                           name="home" ${news != null && news.home ? 'checked' : ''}>
+                    <input type="checkbox" class="form-check-input" id="home" name="home">
                     <label class="form-check-label" for="home">Hiển thị trên trang chủ</label>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Lưu Bài</button>
-                    <button type="reset" class="btn btn-secondary">Làm mới</button>
-                    <button type="button" class="btn btn-secondary ml-2" onclick="history.go(-1);">Hủy</button>
-                </div>
+                <button type="submit" class="btn btn-primary">Gửi Bài</button>
+                <button type="reset" class="btn btn-secondary">Xóa</button>
             </form>
         </div>
     </div>
 </div>
-</div>
-
-<jsp:include page="../footer.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

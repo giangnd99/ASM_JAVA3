@@ -25,6 +25,7 @@
     }
     .footer .text-muted {
         opacity: 0.8;
+        color:#fff !important;
     }
     .footer .social-links i {
         font-size: 1.5rem;

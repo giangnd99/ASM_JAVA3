@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <style>
     .footer {
         background: linear-gradient(135deg, #4b79a1, #283e51);
@@ -23,6 +24,7 @@
     }
     .footer .text-muted {
         opacity: 0.8;
+        color: #fff !important;
     }
     .footer .social-links i {
         font-size: 1.5rem;
@@ -57,7 +59,7 @@
                     <input type="email" name="email" class="form-control me-2" placeholder="Nhập email của bạn" required />
                     <button type="submit" class="btn btn-success">Nhận Tin</button>
                 </form>
-                <small class="text-muted">Đọc giả có thể điền email để nhận thông tin mới nhất.</small>
+                <small  class="text-muted" style="color:#fff">Đọc giả có thể điền email để nhận thông tin mới nhất.</small>
             </div>
 
             <!-- Right Section: Contact Information -->
@@ -75,7 +77,7 @@
         <div class="row mt-4">
             <div class="col text-center">
                 <div class="mb-2 navigation-links">
-                    <a href="#" class="text-muted me-3">Trang chủ</a>
+                    <a href="#" class="text-muted me-3" style="color:#fff">Trang chủ</a>
                 </div>
                 <div class="social-links">
                     <a href="#" class="me-3 text-muted"><i class="bi bi-facebook fs-4"></i></a>
@@ -88,7 +90,7 @@
         <div class="row mt-4">
             <div class="col text-center text-muted">
                 <hr>
-                <p class="mb-0">© Copyright 2024 FPT-Polytechnic Co., Ltd. All rights reserved.</p>
+                <p class="mb-0" style="color:#fff">© Copyright 2024 FPT-Polytechnic Co., Ltd. All rights reserved.</p>
             </div>
         </div>
     </div>

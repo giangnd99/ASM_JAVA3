@@ -9,8 +9,9 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+<jsp:include page="../layout/header.jsp"></jsp:include>
+
 <div class="container-lg">
-    <jsp:include page="../layout/header.jsp"></jsp:include>
     <h1 class="text-center my-4">Đăng Nhập</h1>
 
     <div class="row justify-content-center">
@@ -32,7 +33,7 @@
             </form>
 
             <div class="text-center my-3">
-                <a href="forgot_password.jsp" class="text-decoration-none">Quên mật khẩu?</a>
+                <a href="forgot_password" class="text-decoration-none">Quên mật khẩu?</a>
             </div>
 
             <div class="text-center">

@@ -4,13 +4,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.NewsLetterService;
 
 import java.io.IOException;
 
 @WebServlet("/admin/list_newsletter")
 public class NewsletterManage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/admin/list_newsletter.jsp").forward(request, response);
+        NewsLetterService service = new NewsLetterService(request,response);
+        service.listNewsletters();
     }
 }
 

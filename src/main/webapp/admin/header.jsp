@@ -61,18 +61,22 @@
                 <input type="search" name="keyword" class="form-control me-2" placeholder="Tìm kiếm" required/>
                 <button type="submit" class="btn btn-outline-light">Tìm</button>
             </form>
+            <c:set var="baseUri" value="${pageContext.request.contextPath}/admin" />
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="admin/list_newsletter" class="nav-link">Newsletter</a>
+                    <a href="${baseUri}/list_newsletter" class="nav-link">Newsletter</a>
                 </li>
                 <li class="nav-item">
-                    <a href="admin/list_news" class="nav-link">Quản Lý Tin Tức</a>
+                    <a href="${baseUri}/list_category" class="nav-link"> Quản Lý Loại Tin</a>
                 </li>
                 <li class="nav-item">
-                    <a href="admin/list_users" class="nav-link">Quản Lý Người Dùng</a>
+                    <a href="${baseUri}/list_news" class="nav-link">Quản Lý Tin Tức</a>
                 </li>
                 <li class="nav-item">
-                    <a href="admin/list_reports" class="nav-link">Thống Kê</a>
+                    <a href="${baseUri}/list_users" class="nav-link">Quản Lý Người Dùng</a>
+                </li>
+                <li class="nav-item">
+                    <a href="${baseUri}/list_reports" class="nav-link">Thống Kê</a>
                 </li>
                 <li class="nav-item">
                     <a href="logout" class="nav-link">Đăng Xuất</a>
