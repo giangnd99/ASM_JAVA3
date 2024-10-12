@@ -22,7 +22,7 @@
 </head>
 <body style="height: auto;">
 <!-- Include Header -->
-<jsp:include page="/admin/header.jsp"></jsp:include>
+<jsp:include page="../layout/header.jsp"></jsp:include>
 <section  style="background-color: #eee; padding: 20px 20px">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -37,13 +37,13 @@
                                     <!-- Tên của bạn -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1c">Tên của bạn</label>
-                                        <input type="text" id="form3Example1c" name="fullname" value="${user.fullname}" class="form-control"/>
+                                        <input type="text" id="form3Example1c" class="form-control"/>
                                     </div>
 
                                     <!-- Sinh nhật -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="birthday">Sinh nhật</label>
-                                        <input type="date" id="birthday" name="birthday" value="${user.fullname}" class="form-control"/>
+                                        <input type="date" id="birthday" class="form-control"/>
                                     </div>
 
                                     <!-- Giới tính -->
@@ -51,16 +51,16 @@
                                         <h6>Giới Tính:</h6>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                   id="femaleGender" value="false" checked/>
+                                                   id="femaleGender" value="female" checked/>
                                             <label class="form-check-label" for="femaleGender">Nữ</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender"
-                                                   id="maleGender" value="true" ${user.gender?'checked':''}/>
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                   id="maleGender" value="male"/>
                                             <label class="form-check-label" for="maleGender">Nam</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender"
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                                    id="otherGender" value="other"/>
                                             <label class="form-check-label" for="otherGender">Khác</label>
                                         </div>
@@ -69,44 +69,27 @@
                                     <!-- Email -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3c">Email của bạn</label>
-                                        <input type="email" id="form3Example3c" name="email" class="form-control"/>
+                                        <input type="email" id="form3Example3c" class="form-control"/>
                                     </div>
 
                                     <!-- Số điện thoại -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="phone">Số điện thoại của bạn</label>
-                                        <input type="number" id="phone" name="phone" class="form-control"/>
+                                        <input type="number" id="phone" class="form-control"/>
                                     </div>
 
                                     <!-- Mật khẩu -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4c">Mật khẩu</label>
-                                        <input type="password" id="form3Example4c" name="password" class="form-control"/>
+                                        <input type="password" id="form3Example4c" class="form-control"/>
                                     </div>
-                                    <div class="gender-section">
-                                        <h6>Vai trò:</h6>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role"
-                                                   id="admin" value="true" ${user.role?'checked':''}/>
-                                            <label class="form-check-label" for="femaleGender">Admin</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role"
-                                                   id="author" value="false"/>
-                                            <label class="form-check-label" for="author">Author</label>
-                                        </div>
 
+                                    <!-- Nhập lại mật khẩu -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example4cd">Nhập lại mật khẩu</label>
+                                        <input type="password" id="form3Example4cd" class="form-control"/>
                                     </div>
                                     <br>
-                                    <!-- Điều khoản dịch vụ -->
-                                    <div class="form-check d-flex justify-content-center mb-5">
-                                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c"/>
-                                        <label class="form-check-label checkbox-label" for="form2Example3c">
-                                            Đồng ý với những điều kiện của chúng tôi
-                                            <a href="#!">Điều khoản dịch vụ</a>
-                                        </label>
-                                    </div>
-
                                     <!-- Nút Đăng ký -->
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <button type="submit" class="btn btn-primary btn-lg">Đăng kí</button>
@@ -129,7 +112,7 @@
     </div>
 </section>
 <!-- Include Footer -->
-<jsp:include page="/admin/footer.jsp"></jsp:include>
+<jsp:include page="../layout/footer.jsp"></jsp:include>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
