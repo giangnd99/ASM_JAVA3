@@ -67,12 +67,10 @@
 <div class="container-lg mt-5">
     <!-- Title Section with Create Form -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="header-title">Danh Sách Danh Mục</h1>
-
-        <!-- Form để nhập tên category và thêm category -->
-        <form action="create_category.jsp" method="post" class="form-inline-custom">
-            <input type="text" class="form-control me-2" placeholder="Nhập tên danh mục" name="categoryName" required>
-            <button type="submit" class="btn create-category-btn btn-lg">Thêm Danh Mục</button>
+        <h1 class="header-title">List Newsletter</h1>
+        <form action="create_newsletter.jsp" method="post" class="form-inline-custom">
+            <input type="text" class="form-control me-2" placeholder="Nhập email" name="email" required>
+            <button type="submit" class="btn create-category-btn btn-lg">Thêm Newsletter</button>
         </form>
     </div>
 
@@ -93,10 +91,10 @@
                     <td>${newsletters.email}</td>
                     <td>${newsletters.enabled ?'Đăng kí':'Đã hủy'}</td>
                     <td class="text-center action-btns">
-                        <a href="edit_category?${newsletters.id}" class="btn btn-warning btn-sm">
+                        <a href="edit_newsletter?${newsletters.email}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil"></i> Sửa
                         </a>
-                        <a href="delete_category??${newsletters.id}" class="btn btn-danger btn-sm">
+                        <a href="edit_newsletter?${newsletters.email}" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Xóa
                         </a>
                     </td>
