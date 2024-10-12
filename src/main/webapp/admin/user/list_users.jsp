@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,15 +75,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <%--                    <td>1</td>--%>
-                    <%--                    <td>Nguyễn Đằng Giang</td>--%>
-                    <%--                    <td class="password-col">*********</td>--%>
-                    <%--                    <td>nguyendanggiang1999@gmail.com</td>--%>
-                    <%--                    <td>0123456789</td>--%>
-                    <%--                    <td>01/01/1990</td>--%>
-                    <%--                    <td>Nam</td>--%>
-                    <%--                    <td>Admin</td>--%>
                     <c:forEach var="user" items="${listUsers}">
                 <tr>
                     <td>${user.id}</td>
@@ -97,7 +89,7 @@
                         <a href="update_user?id=${user.id}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil"></i> Sửa
                         </a>
-                        <a href="delete_user?${user.id}" class="btn btn-danger btn-sm">
+                        <a href="delete_user?id=${user.id}" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Xóa
                         </a>
                     </td>
