@@ -84,7 +84,7 @@
                     <td>${user.phone}</td>
                     <td>${user.birthday}</td>
                     <td>${user.gender? "Nam" : "Nữ"}</td>
-                    <td>${user.role}</td>
+                    <td>${user.role?"ADMIN":"AUTHOR"}</td>
                     <td class="text-center action-btns">
                         <a href="update_user?id=${user.id}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil"></i> Sửa

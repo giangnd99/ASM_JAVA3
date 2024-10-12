@@ -1,3 +1,5 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -159,24 +161,24 @@
             <h2 class="my-4 text-center">Tin tức mới</h2>
             <div class="row">
                 <%-- Loop to display latest news --%>
-                <%-- <c:forEach items="${listLatestNews}" var="news"> --%>
+<%--                 <c:forEach items="${listLatestNews}" var="news">--%>
                 <div class="col-md-12 mb-3 custom-card d-flex align-items-start">
                     <div class="me-3">
                         <%-- News Image --%>
-                        <img src="images/news8.jpg" alt="News Image" class="img-fluid rounded"
+                        <img src="${pageContext.request.contextPath}images/news8.jpg" alt="News Image" class="img-fluid rounded"
                              style="width: 150px; height: 100px;">
                         <%-- ${news.image} --%>
                     </div>
                     <div class="flex-grow-1">
                         <%-- News Title --%>
                         <h5><a href="frontend/news/news_detail?id=" class="text-primary">Tiêu đề tin tức 1</a></h5>
-                        <%-- ${news.title} --%>
+<%--                         ${news.title}--%>
                         <%-- News Summary --%>
                         <p class="mb-2">Nội dung tóm tắt...</p>
-                        <%-- ${fn:substring(news.content, 0, 100)}... --%>
+<%--                         ${fn:substring(news.content, 0, 100)}...--%>
                         <%-- Post Date and Author --%>
                         <small class="text-muted">Ngày đăng: 28/09/2024 | Tác giả: Nguyễn Đằng Giang</small>
-                        <%-- ${news.posted_date} | ${news.author_name} --%>
+<%--                         ${news.posted_date} | ${news.author_name}--%>
                     </div>
                 </div>
                 <div class="col-md-12 mb-3 custom-card d-flex align-items-start">
@@ -184,18 +186,18 @@
                         <%-- News Image --%>
                         <img src="images/news8.jpg" alt="News Image" class="img-fluid rounded"
                              style="width: 150px; height: 100px;">
-                        <%-- ${news.image} --%>
+<%--                         ${news.image}--%>
                     </div>
                     <div class="flex-grow-1">
                         <%-- News Title --%>
                         <h5><a href="frontend/news/news_detail?id=" class="text-primary">Tiêu đề tin tức 2</a></h5>
-                        <%-- ${news.title} --%>
+<%--                         ${news.title}--%>
                         <%-- News Summary --%>
                         <p class="mb-2">Nội dung tóm tắt...</p>
-                        <%-- ${fn:substring(news.content, 0, 100)}... --%>
+<%--                         ${fn:substring(news.content, 0, 100)}...--%>
                         <%-- Post Date and Author --%>
                         <small class="text-muted">Ngày đăng: 28/09/2024 | Tác giả: Nguyễn Đằng Giang</small>
-                        <%-- ${news.posted_date} | ${news.author_name} --%>
+<%--                         ${news.posted_date} | ${news.author_name}--%>
                     </div>
                 </div>
                 <div class="col-md-12 mb-3 custom-card d-flex align-items-start">

@@ -14,14 +14,14 @@
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
-            <img src="images/news2.jpg" class="d-block w-100" alt="Second news on Data" style="height: 500px;">
+            <img src="${pageContext.request.contextPath}/images/news2.jpg" class="d-block w-100" alt="Second news on Data" style="height: 500px;">
             <div class="carousel-caption d-none d-md-block caption-bg">
                 <h5 class="text-white">Tin công nghệ thứ 2</h5>
                 <p class="text-light">Đây là trang tin tức về data</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="images/news3.jpg" class="d-block w-100" alt="Third news on Cloud" style="height: 500px;">
+            <img src="${pageContext.request.contextPath}/images/news3.jpg" class="d-block w-100" alt="Third news on Cloud" style="height: 500px;">
             <div class="carousel-caption d-none d-md-block caption-bg">
                 <h5 class="text-white">Tin công nghệ thứ 3</h5>
                 <p class="text-light">Đây là trang tin tức về cloud</p>
