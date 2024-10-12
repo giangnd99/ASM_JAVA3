@@ -24,6 +24,11 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        UserService service = new UserService(req, resp);
+        try{
+            service.doLogin();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

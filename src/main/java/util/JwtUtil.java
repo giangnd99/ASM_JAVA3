@@ -1,18 +1,21 @@
 package util;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
 public class JwtUtil {
-    private String secretKey = "your_secret_key"; // Thay đổi secret key cho riêng bạn
+    // Tạo khóa bí mật an toàn (256 bits) cho HS256
+    SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
     private long expirationTime = 1000 * 60 * 60; // 1 giờ
 
     public String generateToken(String email) {
@@ -26,7 +29,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(SignatureAlgorithm.HS256, key) // Sử dụng khóa an toàn
                 .compact();
     }
 
@@ -40,7 +43,7 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
     }
 
     private boolean isTokenExpired(String token) {

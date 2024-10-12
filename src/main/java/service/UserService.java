@@ -2,7 +2,6 @@ package service;
 
 import controller.frontend.HomePage;
 import dao.impl.UserDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +13,9 @@ import util.ServletUtil;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class UserService {
@@ -52,7 +54,6 @@ public class UserService {
     public void createUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
 
         String email = request.getParameter("email");
-        String fullName = request.getParameter("fullname");
         String password = request.getParameter("password");
 
         Users existingUser = userDAO.findByEmail(email);
@@ -61,9 +62,11 @@ public class UserService {
             servletUtil.setErrorMessage("Không thể tạo tài khoản. Đã có một tài khoản có email " + email);
             servletUtil.forwardToPage("/common/message.jsp");
         } else {
+            Users newUser = new Users();
+            readFields(request, newUser);
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodedPassword = encoder.encode(password);
-            Users newUser = new Users(email, fullName, encodedPassword);
+            newUser.setPassword(encodedPassword);
             userDAO.create(newUser);
             listUsers("Tài khoản đã tạo thành công!!");
         }
@@ -93,8 +96,10 @@ public class UserService {
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodedPassword = encoder.encode(password);
-
-            Users updatedUser = new Users(userId, email, fullName, encodedPassword);
+            Users updatedUser = new Users();
+            readFields(request, updatedUser);
+            updatedUser.setId(userId);
+            updatedUser.setPassword(encodedPassword);
             userDAO.update(updatedUser);
             listUsers("Tài khoản được cập nhật thành công!!");
         }
@@ -106,6 +111,42 @@ public class UserService {
         listUsers("User has been deleted successfully");
     }
 
+    public void readFields(HttpServletRequest request, Users user) {
+        // Đọc dữ liệu từ request và gán vào đối tượng User
+        String fullname = request.getParameter("fullname");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String birthdayStr = request.getParameter("birthday");
+        String genderStr = request.getParameter("gender");
+        String roleStr = request.getParameter("role");
+
+        // Gán giá trị vào đối tượng User
+        user.setFullname(fullname);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
+
+        // Chuyển đổi chuỗi ngày sinh thành đối tượng Date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date birthday = formatter.parse(birthdayStr);
+            user.setBirthday(birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            // Xử lý lỗi nếu không thể parse ngày sinh
+        }
+
+        // Chuyển đổi chuỗi gender thành boolean
+        boolean gender = Boolean.parseBoolean(genderStr);
+        user.setGender(gender);
+
+        // Chuyển đổi chuỗi role thành boolean
+        boolean role = Boolean.parseBoolean(roleStr);
+        user.setRole(role);
+    }
+
+
     public void showLogin() throws Exception {
         String loginPage = "/frontend/login.jsp";
         servletUtil.forwardToPage(loginPage);
@@ -116,6 +157,7 @@ public class UserService {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        String remember = request.getParameter("rememberMe");
         Users user = userDAO.findByEmail(email);
         boolean loginResult = false;
 
