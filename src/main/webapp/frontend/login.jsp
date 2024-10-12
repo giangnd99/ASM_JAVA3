@@ -15,7 +15,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="login_process" method="POST">
+            <form action="login" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required>
@@ -36,7 +36,7 @@
             </div>
 
             <div class="text-center">
-                <span>Chưa có tài khoản?</span> <a href="register.jsp" class="text-decoration-none">Đăng ký ngay</a>
+                <span>Chưa có tài khoản?</span> <a href="register" class="text-decoration-none">Đăng ký ngay</a>
             </div>
         </div>
     </div>

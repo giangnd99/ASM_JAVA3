@@ -107,13 +107,3 @@
     </div>
 </div>
 
-<%--<!-- Uncomment and customize according to category logic -->--%>
-<%--<c:forEach var="category" items="${listCategory}" varStatus="status">--%>
-<%--    <c:url var="news_category" value="${pageContext.request.contextPath}/list_by_category"></c:url>--%>
-<%--    <a href="view_category?id=${category.categoryId}" class="text-decoration-none">--%>
-<%--        <strong><c:out value="${category.name}" /></strong>--%>
-<%--    </a>--%>
-<%--    <c:if test="${not status.last}">--%>
-<%--        &nbsp; | &nbsp;--%>
-<%--    </c:if>--%>
-<%--</c:forEach>--%>

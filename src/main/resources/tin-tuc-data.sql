@@ -11,7 +11,7 @@ USE newswebdb;
 CREATE TABLE users (
   id INT(11) NOT NULL AUTO_INCREMENT,
   email VARCHAR(64) NOT NULL,
-  password VARCHAR(32) NOT NULL,
+  password VARCHAR(80) NOT NULL,
   fullname VARCHAR(64) NOT NULL,
   birthday date null,
   phone varchar(11) null,
