@@ -40,30 +40,30 @@
                                     <!-- Tên của bạn -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1c">Tên của bạn</label>
-                                        <input type="text" id="form3Example1c" class="form-control"/>
+                                        <input type="text" id="form3Example1c" class="form-control" name="fullname"/>
                                     </div>
 
                                     <!-- Sinh nhật -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="birthday">Sinh nhật</label>
-                                        <input type="date" id="birthday" class="form-control"/>
+                                        <input type="date" id="birthday" class="form-control" name="birthday"/>
                                     </div>
 
                                     <!-- Giới tính -->
                                     <div class="gender-section">
                                         <h6>Giới Tính:</h6>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            <input class="form-check-input" type="radio" name="gender"
                                                    id="femaleGender" value="female" checked/>
                                             <label class="form-check-label" for="femaleGender">Nữ</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            <input class="form-check-input" type="radio" name="gender"
                                                    id="maleGender" value="male"/>
                                             <label class="form-check-label" for="maleGender">Nam</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            <input class="form-check-input" type="radio" name="gender"
                                                    id="otherGender" value="other"/>
                                             <label class="form-check-label" for="otherGender">Khác</label>
                                         </div>
@@ -72,30 +72,30 @@
                                     <!-- Email -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3c">Email của bạn</label>
-                                        <input type="email" id="form3Example3c" class="form-control"/>
+                                        <input type="email" id="form3Example3c" class="form-control" name="email"/>
                                     </div>
 
                                     <!-- Số điện thoại -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="phone">Số điện thoại của bạn</label>
-                                        <input type="number" id="phone" class="form-control"/>
+                                        <input type="number" id="phone" class="form-control" name="phone"/>
                                     </div>
 
                                     <!-- Mật khẩu -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4c">Mật khẩu</label>
-                                        <input type="password" id="form3Example4c" class="form-control"/>
+                                        <input type="password" id="form3Example4c" class="form-control" name="password"/>
                                     </div>
 
                                     <!-- Nhập lại mật khẩu -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4cd">Nhập lại mật khẩu</label>
-                                        <input type="password" id="form3Example4cd" class="form-control"/>
+                                        <input type="password" id="form3Example4cd" class="form-control" name="repeat_password"/>
                                     </div>
 
                                     <!-- Điều khoản dịch vụ -->
                                     <div class="form-check d-flex justify-content-center mb-5">
-                                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c"/>
+                                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" name="checkbox"/>
                                         <label class="form-check-label checkbox-label" for="form2Example3c">
                                             Đồng ý với những điều kiện của chúng tôi
                                             <a href="#!">Điều khoản dịch vụ</a>

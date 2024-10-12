@@ -89,38 +89,23 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>Công nghệ</td>
-                    <td>11/10/2024</td>
+<%--                    <td>1</td>--%>
+<%--                    <td>Công nghệ</td>--%>
+                    <c:forEach var="category" items="${categories}">
+                        <td>${category.id}</td>
+                        <td>${category.name}</td>
                     <td class="text-center action-btns">
-<%--                        <a href="edit_category?id=1" class="btn btn-warning btn-sm">--%>
-<%--                            <i class="bi bi-pencil"></i> Sửa--%>
-<%--                        </a>--%>
                         <a href="delete_category?id=1" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Xóa
                         </a>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Giáo dục</td>
-                    <td>12/10/2024</td>
-                    <td class="text-center action-btns">
-<%--                        <a href="edit_category?id=2" class="btn btn-warning btn-sm">--%>
-<%--                            <i class="bi bi-pencil"></i> Sửa--%>
-<%--                        </a>--%>
-                        <a href="delete_category?id=2" class="btn btn-danger btn-sm">
-                            <i class="bi bi-trash"></i> Xóa
-                        </a>
-                    </td>
-                </tr>
-                <!-- Thêm nhiều dòng category khác tại đây -->
+                </c:forEach>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
 <!-- Footer -->
 <hr class="mt-5">
 <jsp:include page="../footer.jsp"/>
