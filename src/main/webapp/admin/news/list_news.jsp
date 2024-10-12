@@ -42,11 +42,45 @@
             margin-right: 5px;
         }
         }
+        /* Style cho tiêu đề trang */
+        .header-title {
+            color: #007bff;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Style cho nút thêm danh mục */
+        .create-category-btn {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .create-category-btn i {
+            font-size: 1.5rem;
+        }
+
+        .create-category-btn:hover {
+            background-color: #218838;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"></jsp:include>
+<br>
 <div class="container-lg">
-    <jsp:include page="../header.jsp"></jsp:include>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="header-title">List New</h1>
+        <!-- Thẻ a để tạo danh mục tin tức -->
+        <a href="create_news.jsp" class="btn create-category-btn btn-lg">Tạo Tin Tức Mới</a>
+    </div>
     <div class="card shadow">
         <div class="card-body">
             <table class="table table-hover table-bordered table-striped">
@@ -83,12 +117,13 @@
                     </tr>
                 </c:forEach>
                 </tbody>
-                <!-- Bạn có thể thêm nhiều dòng tin tức khác vào đây -->
             </table>
         </div>
     </div>
 </div>
+<br>
 <!-- Footer -->
+<jsp:include page="../footer.jsp"/>
 <hr class="mt-5">
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

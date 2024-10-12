@@ -47,7 +47,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
 
 <div class="container-lg mt-5">
     <!-- Tiêu đề và nút Thêm Người Dùng -->
@@ -111,7 +111,7 @@
 
 <!-- Footer -->
 <hr class="mt-5">
-<jsp:include page="footer.jsp"/>
+<jsp:include page="../footer.jsp"/>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
