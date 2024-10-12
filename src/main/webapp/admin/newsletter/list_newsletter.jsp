@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -81,39 +82,26 @@
             <table class="table table-hover table-bordered table-striped text-center">
                 <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Tên Danh Mục</th>
-                    <th>Ngày Tạo</th>
+                    <th>Email</th>
+                    <th>Tình Trạng</th>
                     <th>Hành Động</th>
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="newsletters" items="${listNewsletters}">
                 <tr>
-                    <td>1</td>
-                    <td>Công nghệ</td>
-                    <td>11/10/2024</td>
+                    <td>${newsletters.email}</td>
+                    <td>${newsletters.enabled ?'Đăng kí':'Đã hủy'}</td>
                     <td class="text-center action-btns">
-                        <a href="edit_category?id=1" class="btn btn-warning btn-sm">
+                        <a href="edit_category?${newsletters.id}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil"></i> Sửa
                         </a>
-                        <a href="delete_category?id=1" class="btn btn-danger btn-sm">
+                        <a href="delete_category??${newsletters.id}" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Xóa
                         </a>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Giáo dục</td>
-                    <td>12/10/2024</td>
-                    <td class="text-center action-btns">
-                        <a href="edit_category?id=2" class="btn btn-warning btn-sm">
-                            <i class="bi bi-pencil"></i> Sửa
-                        </a>
-                        <a href="delete_category?id=2" class="btn btn-danger btn-sm">
-                            <i class="bi bi-trash"></i> Xóa
-                        </a>
-                    </td>
-                </tr>
+                </c:forEach>
                 <!-- Thêm nhiều dòng category khác tại đây -->
                 </tbody>
             </table>

@@ -36,7 +36,7 @@ public class NewsLetterService {
             servletUtil.setErrorMessage(message);
         }
 
-        String listPage = "newsletter_list.jsp";
+        String listPage = "/admin/newsletter/list_newsletter.jsp";
         servletUtil.forwardToPage(listPage);
     }
 
