@@ -146,8 +146,8 @@
     </style>
 </head>
 <body>
+<jsp:include page="layout/header.jsp"></jsp:include>
 <div class="container-lg">
-    <jsp:include page="layout/header.jsp"></jsp:include>
     <h1 class="text-center my-4">Trang Chủ Tin Tức</h1>
 
     <div class="row">

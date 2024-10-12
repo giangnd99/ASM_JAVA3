@@ -78,9 +78,7 @@
     </style>
 </head>
 <body>
-<main class="container-lg">
-    <jsp:include page="../../layout/header.jsp"/>
-
+<jsp:include page="../../layout/header.jsp"/>
     <div class="row">
         <!-- Nội dung bài báo (80%) -->
         <section class="col-md-8">

@@ -66,13 +66,16 @@
                     <a href="admin/list_newsletter" class="nav-link">Newsletter</a>
                 </li>
                 <li class="nav-item">
-                    <a href="admin/list_news" class="nav-link">Quản Lý Tin Tức</a>
+                    <a href="/admin/category" class="nav-link"> Quản Lý Loại Tin</a>
                 </li>
                 <li class="nav-item">
-                    <a href="admin/list_users" class="nav-link">Quản Lý Người Dùng</a>
+                    <a href="/admin/list_news" class="nav-link">Quản Lý Tin Tức</a>
                 </li>
                 <li class="nav-item">
-                    <a href="admin/list_reports" class="nav-link">Thống Kê</a>
+                    <a href="/admin/list_users" class="nav-link">Quản Lý Người Dùng</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/list_reports" class="nav-link">Thống Kê</a>
                 </li>
                 <li class="nav-item">
                     <a href="logout" class="nav-link">Đăng Xuất</a>

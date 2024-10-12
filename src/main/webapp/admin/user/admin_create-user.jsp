@@ -2,9 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <jsp:include page="../layout/page_header.jsp">
-        <jsp:param name="title" value="Đăng Ký Tài Khoản"/>
-    </jsp:include>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -25,7 +22,7 @@
 </head>
 <body style="height: auto;">
 <!-- Include Header -->
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<jsp:include page="/admin/header.jsp"></jsp:include>
 <section  style="background-color: #eee; padding: 20px 20px">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -92,7 +89,21 @@
                                         <label class="form-label" for="form3Example4cd">Nhập lại mật khẩu</label>
                                         <input type="password" id="form3Example4cd" class="form-control"/>
                                     </div>
+                                    <div class="gender-section">
+                                        <h6>Vai trò:</h6>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role"
+                                                   id="admin" value="admin" checked/>
+                                            <label class="form-check-label" for="femaleGender">Admin</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role"
+                                                   id="author" value="author"/>
+                                            <label class="form-check-label" for="author">Author</label>
+                                        </div>
 
+                                    </div>
+                                    <br>
                                     <!-- Điều khoản dịch vụ -->
                                     <div class="form-check d-flex justify-content-center mb-5">
                                         <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c"/>
@@ -124,7 +135,7 @@
     </div>
 </section>
 <!-- Include Footer -->
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="/admin/footer.jsp"></jsp:include>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
