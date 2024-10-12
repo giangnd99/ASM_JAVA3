@@ -26,22 +26,26 @@
             width: 100%;
             margin: 0 auto;
 
-        .create-news-btn {
-            background-color: #28a745;
-            border-color: #28a745;
-            color: #fff;
+            .create-news-btn {
+                background-color: #28a745;
+                border-color: #28a745;
+                color: #fff;
+            }
+
+            .create-news-btn:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+
+            .table th, .table td {
+                vertical-align: middle;
+            }
+
+            .action-btns a {
+                margin-right: 5px;
+            }
         }
-        .create-news-btn:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
-        .table th, .table td {
-            vertical-align: middle;
-        }
-        .action-btns a {
-            margin-right: 5px;
-        }
-        }
+
         /* Style cho tiêu đề trang */
         .header-title {
             color: #007bff;
@@ -106,14 +110,15 @@
                         </c:forEach></td>
                         <td><fmt:formatDate pattern='dd/MM/yyyy' value='${news.postedDate}'/></td>
                         <td>${fn:substring(news.content, 0, 50)}...</td>
-                        <td>
                         <td class="text-center action-btns">
                             <a href="update_news?id=${news.id}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil"></i> Sửa
                             </a>
-                            <a href="delete_news?id=${news.id}" class="btn btn-danger btn-sm"  onclick="return confirm('Bạn có chắc muốn xóa tin này?');">
+                            <a href="delete_news?id=${news.id}" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Bạn có chắc muốn xóa tin này?');">
                                 <i class="bi bi-trash"></i> Xóa
                             </a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

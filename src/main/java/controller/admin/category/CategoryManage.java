@@ -8,7 +8,7 @@ import service.CategoryService;
 
 import java.io.IOException;
 
-@WebServlet("/admin/category")
+@WebServlet("/admin/list_category")
 public class CategoryManage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CategoryService categoryService = new CategoryService(request, response);

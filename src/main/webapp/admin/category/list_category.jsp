@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -83,19 +84,18 @@
                 <tr>
                     <th>ID</th>
                     <th>Tên Danh Mục</th>
-                    <th>Ngày Tạo</th>
                     <th>Hành Động</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-<%--                    <td>1</td>--%>
-<%--                    <td>Công nghệ</td>--%>
-                    <c:forEach var="category" items="${categories}">
-                        <td>${category.id}</td>
-                        <td>${category.name}</td>
+                    <%--                    <td>1</td>--%>
+                    <%--                    <td>Công nghệ</td>--%>
+                    <c:forEach var="category" items="${listCategory}">
+                    <td>${category.id}</td>
+                    <td>${category.name}</td>
                     <td class="text-center action-btns">
-                        <a href="delete_category?id=1" class="btn btn-danger btn-sm">
+                        <a href="delete_category?id=${category.id}" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Xóa
                         </a>
                     </td>
