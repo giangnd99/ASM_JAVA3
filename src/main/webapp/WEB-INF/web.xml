@@ -27,5 +27,8 @@
         <error-code>500</error-code>
         <location>/error/500.jsp</location>
     </error-page>
-
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/images/*</url-pattern>
+    </servlet-mapping>
 </web-app>

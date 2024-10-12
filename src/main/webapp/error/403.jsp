@@ -408,8 +408,9 @@
     <div class="error__title">403</div>
     <div class="error__subtitle">Hmmm...</div>
     <div class="error__description">Bạn không quyền truy cập vào trang web này</div>
-    <button class="error__button error__button--active">QUAY VỀ TRANG CHỦ</button>
-</div>
+    <a href="<%= request.getContextPath() %>/">
+        <button class="error__button error__button--active">QUAY VỀ TRANG CHỦ</button>
+    </a></div>
 
 <div class="astronaut">
     <div class="astronaut__backpack"></div>

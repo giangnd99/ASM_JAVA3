@@ -408,8 +408,9 @@
     <div class="error__title">404</div>
     <div class="error__subtitle">Hmmm...</div>
     <div class="error__description">Lỗi máy chủ</div>
-    <button class="error__button error__button--active">QUAY VỀ TRANG CHỦ</button>
-</div>
+    <a href="<%= request.getContextPath() %>/">
+        <button class="error__button error__button--active">QUAY VỀ TRANG CHỦ</button>
+    </a></div>
 
 <div class="astronaut">
     <div class="astronaut__backpack"></div>
