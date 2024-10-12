@@ -16,7 +16,7 @@
 <div class="container my-5">
     <jsp:include page="../layout/header.jsp"></jsp:include>
     <h2 class="text-center">Đăng Ký Tài Khoản</h2>
-    <form action="register" method="post" class="row g-3 needs-validation" novalidate>
+    <form action="register" method="POST" class="row g-3 needs-validation" novalidate>
         <!-- Email -->
         <div class="col-md-6">
             <label for="email" class="form-label">Email</label>
@@ -34,7 +34,7 @@
         <!-- Full Name -->
         <div class="col-md-6">
             <label for="fullName" class="form-label">Họ Và Tên</label>
-            <input type="text" class="form-control" id="fullName" name="full_name" required>
+            <input type="text" class="form-control" id="fullName" name="fullname" required>
             <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
         </div>
 

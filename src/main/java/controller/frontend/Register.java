@@ -8,8 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import service.UserService;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
@@ -23,7 +21,12 @@ public class Register extends HttpServlet {
         }
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        UserService userService = new UserService(request, response);
+        try {
+            userService.createUser();
+        } catch (Exception e) {
+            throw new RuntimeException("Khong the dang ky" + e.getMessage(), e);
+        }
     }
 }
 
