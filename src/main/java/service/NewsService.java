@@ -16,6 +16,8 @@ import util.XImage;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -231,5 +233,17 @@ public class NewsService {
         }
 
         return matchedNews; // Trả về danh sách tin tức khớp với từ khóa
+    }
+
+    public void getTop5LatestNews() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        List<News> latestNews = newsDAO.findTop5Latest();
+        request.setAttribute("latestNews", latestNews);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+    }
+    public void getTop5Viewcount() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        List<News> listTop5viewCount = newsDAO.findTop5MostViewed();
+        request.setAttribute("listTop5viewCount", listTop5viewCount);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }
