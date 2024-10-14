@@ -55,16 +55,6 @@
                 <p class="mb-1">Thông tin liên hệ - Văn phòng quản lý</p>
             </div>
 
-            <!-- Center Section: Email Subscription Form -->
-            <div class="col-md-4 text-center">
-                <h5 class="mb-2">Đăng ký nhận thông báo mới nhất</h5>
-                <form action="admin_subscribe" method="post" class="d-flex justify-content-center">
-                    <input type="email" name="email" class="form-control me-2" placeholder="Nhập email của bạn" required />
-                    <button type="submit" class="btn btn-success">Nhận Thông Báo</button>
-                </form>
-                <small class="text-muted">Nhà báo có thể điền email để nhận thông báo mới nhất.</small>
-            </div>
-
             <!-- Right Section: Contact Information -->
             <div class="col-md-4 text-center text-md-end">
                 <p class="mb-1">Địa chỉ: <strong>123 Đường ABC, P.4, Q.12, TP. Hồ Chí Minh</strong></p>

@@ -74,6 +74,7 @@ public class NewsService {
         request.setAttribute("listCategory", listCategory);
         getTop5Viewcount();
         getTop5LatestNews();
+        getTop5CurrentUser();
 
         if (message != null) {
             request.setAttribute("message", message);
@@ -122,6 +123,7 @@ public class NewsService {
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        String viewCount = request.getParameter("viewCount");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date postedDate;
 
@@ -135,23 +137,25 @@ public class NewsService {
         news.setTitle(title);
         news.setContent(content);
         news.setPostedDate(postedDate);
-
+        news.setViewCount(Integer.parseInt(viewCount));
         Integer categoryId = Integer.parseInt(request.getParameter("category_id"));
         Category category = categoryDAO.get(categoryId);
         news.setCategoryId(category.getId());
 
         int authorId = Integer.parseInt(request.getParameter("author"));
         news.setAuthor(authorId);
-
-        // Xử lý ảnh, nếu cần
-        File fileSaveDir = new File(request.getServletContext().getRealPath("/newsImages"));
-        if (!fileSaveDir.exists()) {
-            fileSaveDir.mkdirs();
-        }
+        // Xử lý hình ảnh, nếu người dùng upload
         Part part = request.getPart("image");
-        String fileName = part.getSubmittedFileName();
-        if (fileName != null && !fileName.isEmpty()) {
-            XImage.saveFile(part, fileSaveDir.getAbsolutePath());
+        if (part != null && part.getSubmittedFileName() != null && !part.getSubmittedFileName().isEmpty()) {
+            // Lấy đường dẫn tới thư mục images trong webapp
+            String saveDirectory = request.getServletContext().getRealPath("/images"); // Trỏ tới thư mục images
+            // Đảm bảo thư mục tồn tại
+            File fileSaveDir = new File(saveDirectory);
+            if (!fileSaveDir.exists()) {
+                fileSaveDir.mkdirs();
+            }
+            // Lưu file vào thư mục và gán tên file vào đối tượng news
+            String fileName = XImage.saveFile(part, saveDirectory);
             news.setImage(fileName);
         }
     }
@@ -265,5 +269,20 @@ public class NewsService {
     public void getTop5Viewcount() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<News> listTop5viewCount = newsDAO.findTop5MostViewed();
         request.setAttribute("listTop5viewCount", listTop5viewCount);
+    }
+
+    public void getTop5CurrentUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        List<News> list = newsDAO.findAll();
+        List<News> list5currentUser = new ArrayList<>();
+        Users loggedUser = (Users) request.getSession().getAttribute("loggedUser");
+        if (loggedUser != null) {
+            Integer loggedUserId = loggedUser.getId();
+            for (News news : list) {
+                if (news.getAuthor() == loggedUserId) {
+                    list5currentUser.add(news);
+                }
+            }
+        }
+        request.setAttribute("list5currentUser", list5currentUser);
     }
 }

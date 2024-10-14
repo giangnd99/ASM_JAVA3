@@ -67,9 +67,6 @@
                 <p class="mb-1">Địa chỉ: <strong> Đ.Tô Ký, P.1, Q.12, Tp. Hồ Chí Minh</strong></p>
                 <p class="mb-1">Hotline: <strong>0918.033.133</strong> - Email: <strong>giangndps38221@fpt.edu.vn</strong></p>
                 <p class="mb-1">Phòng Báo Công Nghệ: <strong>0123455231</strong></p>
-                <a href="#" class="d-block mt-2 text-decoration-none">
-                    <button class="btn btn-primary">Đăng ký tại đây</button>
-                </a>
             </div>
         </div>
 
