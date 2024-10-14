@@ -85,6 +85,11 @@
                             <a href="${pageContext.request.contextPath}/admin" class="nav-link">Admin</a>
                         </li>
                     </c:if>
+                    <c:if test="${loggedUser.role == false}">
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/admin/list_news" class="nav-link">Tin tức của tôi</a>
+                        </li>
+                    </c:if>
                 </c:if>
             </ul>
         </div>

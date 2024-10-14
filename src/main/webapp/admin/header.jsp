@@ -87,6 +87,9 @@
                     <li class="nav-item">
                         <a href="${baseUri}/list_news" class="nav-link">Quản Lý Tin Tức</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}" class="nav-link">Trang chủ</a>
+                    </li>
                 </c:if>
 
                 <li class="nav-item">

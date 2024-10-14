@@ -54,12 +54,12 @@
                                         <h6>Giới Tính:</h6>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="gender"
-                                                   id="femaleGender" value="female"/>
+                                                   id="femaleGender" value="false"/>
                                             <label class="form-check-label" for="femaleGender">Nữ</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="gender"
-                                                   id="maleGender" value="male"/>
+                                                   id="maleGender" value="true"/>
                                             <label class="form-check-label" for="maleGender">Nam</label>
                                         </div>
                                     </div>
