@@ -123,7 +123,6 @@ public class NewsService {
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        String viewCount = request.getParameter("viewCount");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date postedDate;
 
@@ -137,7 +136,7 @@ public class NewsService {
         news.setTitle(title);
         news.setContent(content);
         news.setPostedDate(postedDate);
-        news.setViewCount(Integer.parseInt(viewCount));
+
         Integer categoryId = Integer.parseInt(request.getParameter("category_id"));
         Category category = categoryDAO.get(categoryId);
         news.setCategoryId(category.getId());
@@ -200,13 +199,13 @@ public class NewsService {
         listNews(message);
     }
 
-    public void viewNewsDetail() throws ServletException, IOException {
+    public void viewNewsDetail() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Integer newsId = Integer.parseInt(request.getParameter("id"));
         News news = newsDAO.get(newsId);
-
         request.setAttribute("news", news);
-
-        String detailPage = "/frontend/news_detail.jsp";
+        news.setViewCount(news.getViewCount() + 1); // Tăng số lần xem
+        getRelatedNewsList();
+        String detailPage = "/frontend/news/news_detail.jsp";
         request.getRequestDispatcher(detailPage).forward(request, response);
     }
 
@@ -269,6 +268,12 @@ public class NewsService {
     public void getTop5Viewcount() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<News> listTop5viewCount = newsDAO.findTop5MostViewed();
         request.setAttribute("listTop5viewCount", listTop5viewCount);
+    }
+    public void getRelatedNewsList() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        Integer newsId = Integer.parseInt(request.getParameter("id"));
+        News news = newsDAO.get(newsId);
+        List<News> relatedNewsList = newsDAO.findByCategory(news.getCategoryId());
+        request.setAttribute("relatedNewsList", relatedNewsList);
     }
 
     public void getTop5CurrentUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {

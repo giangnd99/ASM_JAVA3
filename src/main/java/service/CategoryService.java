@@ -50,7 +50,7 @@ public class CategoryService {
         request.setAttribute("listCategory", listCategory);
         request.setAttribute("pageTitle", "Create New News");
 
-        String newPage = "category_form.jsp";
+        String newPage = "/frontend/news/list_by_category.jsp";
         servletUtil.forwardToPage(newPage);
     }
 
