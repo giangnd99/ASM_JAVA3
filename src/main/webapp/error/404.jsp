@@ -408,7 +408,9 @@
     <div class="error__title">404</div>
     <div class="error__subtitle">Hmmm...</div>
     <div class="error__description">Trang này không tồn tại</div>
-    <button class="error__button error__button--active">QUAY VỀ TRANG CHỦ</button>
+    <a href="<%= request.getContextPath() %>/">
+        <button class="error__button error__button--active">QUAY VỀ TRANG CHỦ</button>
+    </a>
 </div>
 
 <div class="astronaut">
