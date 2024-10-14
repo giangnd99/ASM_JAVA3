@@ -6,7 +6,10 @@ import model.NewsLetter;
 import util.XJdbc;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsletterDAO extends GenericDAO<NewsLetter> implements InterfaceDAO<NewsLetter> {
@@ -49,6 +52,20 @@ public class NewsletterDAO extends GenericDAO<NewsLetter> implements InterfaceDA
         } catch (Exception e) {
             throw new RuntimeException("Error when listing newsletters", e);
         }
+    }
+    public List<NewsLetter> findAllEnabledSubscribers() throws SQLException {
+        List<NewsLetter> subscribers = new ArrayList<>();
+        String sql = "SELECT * FROM newsletter WHERE enabled = true";  // Chỉ lấy những email có enabled = true
+
+        ResultSet resultSet = XJdbc.query(sql);  // XJdbc là lớp bạn đang sử dụng để thực hiện truy vấn SQL
+        while (resultSet.next()) {
+            NewsLetter subscriber = new NewsLetter();
+            subscriber.setEmail(resultSet.getString("email"));
+            subscriber.setEnabled(resultSet.getBoolean("enabled"));
+            subscribers.add(subscriber);
+        }
+
+        return subscribers;
     }
 }
 
