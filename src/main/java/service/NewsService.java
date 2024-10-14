@@ -74,11 +74,14 @@ public class NewsService {
         request.setAttribute("listCategory", listCategory);
         getTop5Viewcount();
         getTop5LatestNews();
-
+        String newsIdParam = request.getParameter("id");
+        if (newsIdParam != null && !newsIdParam.isEmpty()) {
+            viewNewsDetail();
+            return;
+        }
         if (message != null) {
             request.setAttribute("message", message);
         }
-
         String listPage = "/index.jsp";
         request.getRequestDispatcher(listPage).forward(request, response);
     }
@@ -196,13 +199,13 @@ public class NewsService {
         listNews(message);
     }
 
-    public void viewNewsDetail() throws ServletException, IOException {
+    public void viewNewsDetail() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Integer newsId = Integer.parseInt(request.getParameter("id"));
         News news = newsDAO.get(newsId);
-
         request.setAttribute("news", news);
-
-        String detailPage = "/frontend/news_detail.jsp";
+        news.setViewCount(news.getViewCount() + 1); // Tăng số lần xem
+        getRelatedNewsList();
+        String detailPage = "/frontend/news/news_detail.jsp";
         request.getRequestDispatcher(detailPage).forward(request, response);
     }
 
@@ -262,8 +265,15 @@ public class NewsService {
         request.setAttribute("latestNews", latestNews);
 
     }
+
     public void getTop5Viewcount() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<News> listTop5viewCount = newsDAO.findTop5MostViewed();
         request.setAttribute("listTop5viewCount", listTop5viewCount);
+    }
+    public void getRelatedNewsList() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        Integer newsId = Integer.parseInt(request.getParameter("id"));
+        News news = newsDAO.get(newsId);
+        List<News> relatedNewsList = newsDAO.findByCategory(news.getCategoryId());
+        request.setAttribute("relatedNewsList", relatedNewsList);
     }
 }

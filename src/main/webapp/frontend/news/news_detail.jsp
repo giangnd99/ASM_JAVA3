@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -17,11 +19,12 @@
         }
 
         article h1 {
-            font-size: 2.5rem;
+
             margin-bottom: 20px;
         }
 
         article h3 {
+            font-size: 1rem;
             color: #007bff;
         }
 
@@ -79,35 +82,17 @@
 </head>
 <body>
 <jsp:include page="../../layout/header.jsp"/>
+
+<main>
     <div class="row">
         <!-- Nội dung bài báo (80%) -->
         <section class="col-md-8">
             <article>
-                <h1>Tiêu đề bài báo: Những thay đổi về phiên bản JDK trong năm 2000000</h1>
-                <h3>Tác giả: ...</h3>
-                <h3>Ngày đăng: 25/09/2024</h3>
-                <img class="img-fluid" src="https://via.placeholder.com/800x400" alt="Hình ảnh bài báo">
-                <p>Đoạn mở đầu của bài báo sẽ giới thiệu về những thay đổi quan trọng trong năm 2024...</p>
-                <p>Bên cạnh đó, bài viết cũng sẽ nêu lên một số quan điểm khác nhau từ các chuyên gia trong lĩnh vực
-                    này...</p>
-                <p>Cuối cùng, bài viết sẽ tóm tắt những điểm chính...</p>
-
-                <!-- Phần bình luận -->
-                <div class="comment-section">
-                    <h3>Bình luận</h3>
-                    <form class="comment-form mb-3">
-                        <textarea class="form-control" rows="3" placeholder="Viết bình luận của bạn..."></textarea>
-                        <button type="submit" class="btn btn-primary mt-2">Gửi bình luận</button>
-                    </form>
-                    <div class="comments">
-                        <div class="comment mb-2">
-                            <p><strong>Người dùng 1:</strong> Đây là một bài viết rất hữu ích!</p>
-                        </div>
-                        <div class="comment mb-2">
-                            <p><strong>Người dùng 2:</strong> Cảm ơn tác giả đã chia sẻ thông tin!</p>
-                        </div>
-                    </div>
-                </div>
+                <h1>Tiêu đề bài báo: ${news.title}</h1>
+                <h3>Tác giả: ${news.author}</h3>
+                <h3>Ngày đăng: <fmt:formatDate pattern='dd/MM/yyyy' value='${news.postedDate}'/></h3>
+                <img class="img-fluid" src="${pageContext.request.contextPath}/images/${news.image}" alt="Hình ảnh bài báo">
+                <p>${news.content}</p>
             </article>
         </section>
 
@@ -115,11 +100,9 @@
         <aside class="col-md-4 mb-4">
             <h3>Tin cùng loại</h3>
             <ul class="list-unstyled">
-                <li><a href="#">Sự kiện việc làm IT Job nổi bật trong tháng 9</a></li>
-                <li><a href="#">Các chính sách mới của ngành CNTT năm 2024</a></li>
-                <li><a href="#">Xu hướng công nghệ hiện nay</a></li>
-                <li><a href="#">Ảnh hưởng của AI với nghành CNTT</a></li>
-                <li><a href="#">Cập nhật các xu hướng công nghệ quốc tế tháng 10</a></li>
+                <c:forEach var="relatedNews" items="${relatedNewsList}">
+                    <li><a href="news_detail?id=${relatedNews.id}">${relatedNews.title}</a></li>
+                </c:forEach>
             </ul>
         </aside>
     </div>
