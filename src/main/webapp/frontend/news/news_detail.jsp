@@ -95,7 +95,19 @@
                 <p>${news.content}</p>
             </article>
         </section>
-
+        <div class="comment-section">
+            <h3>Bình luận</h3>
+            <form class="comment-form mb-3" action="submitComment" method="post">
+                <textarea class="form-control" rows="3" name="content" placeholder="Viết bình luận của bạn..."></textarea>
+                <button type="submit" class="btn btn-primary mt-2">Gửi bình luận</button>
+            </form>
+            <div class="comments">
+                <c:forEach var="comment" items="${comments}">
+                    <div class="comment mb-2">
+                        <p><strong>${comment.username}:</strong> ${comment.content}</p>
+                    </div>
+                </c:forEach>
+            </div>
         <!-- Cột tin tức cùng loại (20%) -->
         <aside class="col-md-4 mb-4">
             <h3>Tin cùng loại</h3>
@@ -106,6 +118,7 @@
             </ul>
         </aside>
     </div>
+
 </main>
 
 <jsp:include page="../../layout/footer.jsp"/>
