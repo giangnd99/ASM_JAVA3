@@ -12,6 +12,7 @@ import jakarta.servlet.http.Part;
 import model.Category;
 import model.News;
 import model.Users;
+import util.ServletUtil;
 import util.XImage;
 
 import java.io.File;
@@ -33,6 +34,7 @@ public class NewsService {
     private UserDAO userDAO;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private ServletUtil servletUtil;
 
     private  NewsLetterService newsLetterService;
     public NewsService(HttpServletRequest request, HttpServletResponse response) {
@@ -41,6 +43,7 @@ public class NewsService {
         newsDAO = new NewsDAO();
         categoryDAO = new CategoryDAO();
         userDAO = new UserDAO();
+        servletUtil = new ServletUtil(request, response);
         newsLetterService = new NewsLetterService(request, response);
 
     }
@@ -119,8 +122,6 @@ public class NewsService {
 
         if (createdNews.getId() > 0) {
             String message = "Tin tức rất hay đã được đăng lên thành công.";
-            String articleUrl = "http://localhost:8083/Assigment_1_PS37973_war_exploded/news-detail?id=" + createdNews.getId();
-            newsLetterService.sendNewsPost(title,articleUrl);
             listNews(message);
         }
     }

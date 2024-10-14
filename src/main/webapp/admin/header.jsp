@@ -56,14 +56,17 @@
                 aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <c:set var="baseUri" value="${pageContext.request.contextPath}/admin" />
         <div class="collapse navbar-collapse" id="topNavbar">
-            <form action="search" method="get" class="d-flex me-auto">
+            <form action="${baseUri}/search_admin" method="get" class="d-flex me-auto">
                 <input type="search" name="keyword" class="form-control me-2" placeholder="Tìm kiếm" required/>
                 <button type="submit" class="btn btn-outline-light">Tìm</button>
             </form>
-            <c:set var="baseUri" value="${pageContext.request.contextPath}/admin" />
             <ul class="navbar-nav ms-auto">
                 <!-- Hiển thị nếu loggedUser.role == true -->
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}" class="nav-link">Trang chủ</a>
+                </li>
                 <c:if test="${loggedUser.role == true}">
                     <li class="nav-item">
                         <a href="${baseUri}/list_newsletter" class="nav-link">Newsletter</a>
@@ -77,18 +80,12 @@
                     <li class="nav-item">
                         <a href="${baseUri}/list_users" class="nav-link">Quản Lý Người Dùng</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="${baseUri}/list_reports" class="nav-link">Thống Kê</a>
-                    </li>
                 </c:if>
 
                 <!-- Luôn hiển thị Quản Lý Tin Tức -->
                 <c:if test="${loggedUser.role == false}">
                     <li class="nav-item">
                         <a href="${baseUri}/list_news" class="nav-link">Quản Lý Tin Tức</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="${pageContext.request.contextPath}" class="nav-link">Trang chủ</a>
                     </li>
                 </c:if>
 

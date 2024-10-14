@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Category;
 import model.News;
 import util.ServletUtil;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,17 +21,18 @@ public class CategoryService {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private ServletUtil servletUtil;
+    private NewsDAO newsDAO;
 
     public CategoryService(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
         categoryDAO = new CategoryDAO();
+        newsDAO = new NewsDAO();
         this.servletUtil = new ServletUtil(request, response);
     }
 
     public void listCategory(String message) throws ServletException, IOException {
         List<Category> listCategory = categoryDAO.listAll();
-
         request.setAttribute("listCategory", listCategory);
 
         if (message != null) {
@@ -45,13 +47,12 @@ public class CategoryService {
         listCategory(null);
     }
 
-    public void showCategoryNewForm() throws ServletException, IOException {
-        List<Category> listCategory = categoryDAO.listAll();
-        request.setAttribute("listCategory", listCategory);
-        request.setAttribute("pageTitle", "Create New News");
+    public void showListByCategory() throws Exception {
+        Integer categoryId = Integer.parseInt(request.getParameter("id"));
 
-        String newPage = "/frontend/news/list_by_category.jsp";
-        servletUtil.forwardToPage(newPage);
+        getListByCategory(categoryId);
+        String viewsByCategoryPage = "/frontend/news/list_by_category.jsp";
+        servletUtil.forwardToPage(viewsByCategoryPage);
     }
 
     public void createCategory() throws ServletException, IOException {
@@ -126,4 +127,12 @@ public class CategoryService {
         listCategory(message);
     }
 
+    public void getListByCategory(Integer id) throws Exception {
+        List<News> listByCategory = newsDAO.findByCategory(id);
+        Category category = categoryDAO.get(id);
+        List<Category> listCategory = categoryDAO.listAll();
+        request.setAttribute("listCategory", listCategory);
+        request.setAttribute("category", category);
+        request.setAttribute("listByCategory", listByCategory);
+    }
 }

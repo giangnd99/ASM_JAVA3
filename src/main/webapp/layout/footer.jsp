@@ -47,7 +47,7 @@
         <div class="row align-items-center">
             <!-- Left Section: Logo and Editor Information -->
             <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                <img src="images/FPT_Polytechnic.png" alt="Company Logo" class="mb-2" style="max-width: 150px;">
+                <img src="${pageContext.request.contextPath}/images/FPT_Polytechnic.png" alt="Company Logo" class="mb-2" style="max-width: 150px;">
                 <p class="mb-1">Tổng biên tập: <strong>Thầy Vỹ</strong></p>
                 <p class="mb-1">Thông tin tòa soạn - FPT</p>
             </div>
@@ -67,9 +67,6 @@
                 <p class="mb-1">Địa chỉ: <strong> Đ.Tô Ký, P.1, Q.12, Tp. Hồ Chí Minh</strong></p>
                 <p class="mb-1">Hotline: <strong>0918.033.133</strong> - Email: <strong>giangndps38221@fpt.edu.vn</strong></p>
                 <p class="mb-1">Phòng Báo Công Nghệ: <strong>0123455231</strong></p>
-                <a href="#" class="d-block mt-2 text-decoration-none">
-                    <button class="btn btn-primary">Đăng ký tại đây</button>
-                </a>
             </div>
         </div>
 
