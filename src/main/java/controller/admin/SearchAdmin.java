@@ -1,23 +1,21 @@
-package controller.frontend.category;
+package controller.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.CategoryService;
+import service.AdminSearchService;
 
 import java.io.IOException;
 
-@WebServlet("/list_by_category")
-public class ListByCategoryServlet extends HttpServlet {
+@WebServlet("/admin/search_admin")
+public class SearchAdmin extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryService categoryService = new CategoryService(req, resp);
-        try {
-            categoryService.showListByCategory();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        AdminSearchService service = new AdminSearchService(req, resp);
+        service.search();
     }
 }

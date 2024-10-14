@@ -89,8 +89,6 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <%--                    <td>1</td>--%>
-                    <%--                    <td>Công nghệ</td>--%>
                     <c:forEach var="category" items="${listCategory}">
                     <td>${category.id}</td>
                     <td>${category.name}</td>

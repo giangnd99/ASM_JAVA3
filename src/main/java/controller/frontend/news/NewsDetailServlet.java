@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/newsDetail")
+@WebServlet("/news_detail")
 public class NewsDetailServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

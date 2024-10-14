@@ -34,8 +34,6 @@ public class UpdateNewsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int newsId = Integer.parseInt(req.getParameter("newsId"));
-        System.out.println(newsId);
         NewsService service = new NewsService(req, resp);
         try {
             service.updateNews();
