@@ -32,25 +32,30 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng kí</p>
-                                <form action="Register" method="POST" class="mx-1 mx-md-4">
-
+                                <form action="${pageContext.request.contextPath}/admin/update_user" method="POST"
+                                      class="mx-1 mx-md-4">
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="idUser">ID của bạn</label>
+                                        <input type="text" id="idUser" name="userId" value="${user.id}" readonly
+                                               class="form-control"/>
+                                    </div>
                                     <!-- Tên của bạn -->
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form3Example1c">Tên của bạn</label>
-                                        <input type="text" id="form3Example1c" name="fullname" value="${user.fullname}" class="form-control"/>
+                                        <label class="form-label" for="fullname">Tên của bạn</label>
+                                        <input type="text" id="fullname" name="fullname" value="${user.fullname}"
+                                               class="form-control"/>
                                     </div>
-
                                     <!-- Sinh nhật -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="birthday">Sinh nhật</label>
-                                        <input type="date" id="birthday" name="birthday" value="${user.fullname}" class="form-control"/>
+                                        <input type="date" id="birthday" name="birthday" value="${user.birthday}"
+                                               class="form-control"/>
                                     </div>
-
                                     <!-- Giới tính -->
                                     <div class="gender-section">
                                         <h6>Giới Tính:</h6>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            <input class="form-check-input" type="radio" name="gender"
                                                    id="femaleGender" value="false" checked/>
                                             <label class="form-check-label" for="femaleGender">Nữ</label>
                                         </div>
@@ -59,29 +64,24 @@
                                                    id="maleGender" value="true" ${user.gender?'checked':''}/>
                                             <label class="form-check-label" for="maleGender">Nam</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender"
-                                                   id="otherGender" value="other"/>
-                                            <label class="form-check-label" for="otherGender">Khác</label>
-                                        </div>
                                     </div>
-
                                     <!-- Email -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3c">Email của bạn</label>
-                                        <input type="email" id="form3Example3c" name="email" class="form-control"/>
+                                        <input type="email" id="form3Example3c" name="email" class="form-control"
+                                               value="${user.email}"/>
                                     </div>
-
                                     <!-- Số điện thoại -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="phone">Số điện thoại của bạn</label>
-                                        <input type="number" id="phone" name="phone" class="form-control"/>
+                                        <input type="number" id="phone" name="phone" class="form-control"
+                                               value="${user.phone}"/>
                                     </div>
-
                                     <!-- Mật khẩu -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4c">Mật khẩu</label>
-                                        <input type="password" id="form3Example4c" name="password" class="form-control"/>
+                                        <input type="password" id="form3Example4c" name="password" class="form-control"
+                                               value="${user.password}"/>
                                     </div>
                                     <div class="gender-section">
                                         <h6>Vai trò:</h6>
@@ -109,7 +109,7 @@
 
                                     <!-- Nút Đăng ký -->
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="submit" class="btn btn-primary btn-lg">Đăng kí</button>
+                                        <button type="submit" class="btn btn-primary btn-lg">Lưu</button>
                                     </div>
 
                                 </form>

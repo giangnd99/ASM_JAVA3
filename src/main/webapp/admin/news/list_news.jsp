@@ -82,8 +82,7 @@
 <div class="container-lg">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="header-title">List New</h1>
-        <!-- Thẻ a để tạo danh mục tin tức -->
-        <a href="create_news.jsp" class="btn create-category-btn btn-lg">Tạo Tin Tức Mới</a>
+        <a href="create_news" class="btn create-category-btn btn-lg">Tạo Tin Tức Mới</a>
     </div>
     <div class="card shadow">
         <div class="card-body">

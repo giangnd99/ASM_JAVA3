@@ -17,14 +17,8 @@ public class HomePage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             NewsService service = new NewsService(request, response);
-            service.getTop5LatestNews();
+            service.homePage();
         } catch (Exception ex) {
-            Logger.getLogger(NewsManage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            NewsService service = new NewsService(request, response);
-            service.getTop5Viewcount();
-        }catch (Exception ex) {
             Logger.getLogger(NewsManage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

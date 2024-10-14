@@ -47,6 +47,10 @@ public class NewsService {
         listNews(null);
     }
 
+    public void homePage() throws Exception {
+        homePage(null);
+    }
+
     public void listNews(String message) throws Exception {
         List<News> listNews = newsDAO.listAll();
         List<Users> listUser = userDAO.findAll();
@@ -58,6 +62,24 @@ public class NewsService {
         }
 
         String listPage = "/admin/news/list_news.jsp";
+        request.getRequestDispatcher(listPage).forward(request, response);
+    }
+
+    public void homePage(String message) throws Exception {
+        List<News> listNews = newsDAO.listAll();
+        List<Users> listUser = userDAO.findAll();
+        List<Category> listCategory = categoryDAO.listAll();
+        request.setAttribute("listNews", listNews);
+        request.setAttribute("listUser", listUser);
+        request.setAttribute("listCategory", listCategory);
+        getTop5Viewcount();
+        getTop5LatestNews();
+
+        if (message != null) {
+            request.setAttribute("message", message);
+        }
+
+        String listPage = "/index.jsp";
         request.getRequestDispatcher(listPage).forward(request, response);
     }
 
@@ -238,12 +260,10 @@ public class NewsService {
     public void getTop5LatestNews() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<News> latestNews = newsDAO.findTop5Latest();
         request.setAttribute("latestNews", latestNews);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
 
     }
     public void getTop5Viewcount() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<News> listTop5viewCount = newsDAO.findTop5MostViewed();
         request.setAttribute("listTop5viewCount", listTop5viewCount);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

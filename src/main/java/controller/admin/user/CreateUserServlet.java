@@ -16,7 +16,7 @@ public class CreateUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService(req, resp);
-        userService.showRegisterForm();// Đổi lại theo anh
+        userService.showCreateUser();
     }
 
     @Override

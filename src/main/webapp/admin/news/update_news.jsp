@@ -43,7 +43,7 @@
 <body>
 <div class="container-lg">
     <jsp:include page="../header.jsp"></jsp:include>
-    <h1 class="text-center my-4">${news != null ? 'Chỉnh sửa bài' : 'Viết bài mới'}</h1>
+    <h1 class="text-center my-4">Chỉnh sửa bài</h1>
     <!-- Form for Writing/Editing News -->
     <div class="container my-5">
         <div class="card p-4">
@@ -61,7 +61,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Nội dung</label>
-                    <textarea class="form-control" name="content" rows="5" required>${news.content}</textarea>
+                    <textarea class="form-control" name="content" rows="20" required>${news.content}</textarea>
                 </div>
 
                 <div class="mb-3">

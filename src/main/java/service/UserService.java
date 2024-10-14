@@ -1,8 +1,8 @@
 package service;
 
-import controller.frontend.HomePage;
 import dao.impl.UserDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Users;
@@ -30,7 +30,7 @@ public class UserService {
         this.response = response;
         this.userDAO = new UserDAO();
         this.jwtUtil = new JwtUtil();
-        this.servletUtil = new ServletUtil(request,response);// Initialize your JWT utility here
+        this.servletUtil = new ServletUtil(request, response);// Initialize your JWT utility here
     }
 
     public void listUsers() throws ServletException, IOException {
@@ -51,6 +51,11 @@ public class UserService {
     public void showRegisterForm() throws ServletException, IOException {
         servletUtil.forwardToPage("/frontend/register.jsp");
     }
+
+    public void showCreateUser() throws ServletException, IOException {
+        servletUtil.forwardToPage("/admin/user/create_user.jsp");
+    }
+
     public void createUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
 
         String email = request.getParameter("email");
@@ -83,26 +88,21 @@ public class UserService {
     public void updateUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         int userId = Integer.parseInt(request.getParameter("userId"));
         String email = request.getParameter("email");
-        String fullName = request.getParameter("fullname");
         String password = request.getParameter("password");
 
         Users userById = userDAO.get(userId);
 
         Users userByEmail = userDAO.findByEmail(email);
 
-        if (userByEmail != null && userByEmail.getId() != userById.getId()) {
-            servletUtil.setErrorMessage("Không thể cập nhật vì đã tồn tại email " + email + " already exists.");
-            servletUtil.forwardToPage("message.jsp");
-        } else {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            String encodedPassword = encoder.encode(password);
-            Users updatedUser = new Users();
-            readFields(request, updatedUser);
-            updatedUser.setId(userId);
-            updatedUser.setPassword(encodedPassword);
-            userDAO.update(updatedUser);
-            listUsers("Tài khoản được cập nhật thành công!!");
-        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(password);
+        Users updatedUser = new Users();
+        readFields(request, updatedUser);
+        updatedUser.setId(userId);
+        updatedUser.setPassword(encodedPassword);
+        userDAO.update(updatedUser);
+        listUsers("Tài khoản được cập nhật thành công!!");
+
     }
 
     public void deleteUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
@@ -146,40 +146,48 @@ public class UserService {
         user.setRole(role);
     }
 
+    // Hàm kiểm tra và trả về người dùng đang đăng nhập
+    public Users loggedUser(HttpServletRequest request) {
+        // Lấy token từ session hoặc cookie
+        String token = (String) request.getSession().getAttribute("token");
+        if (token == null) {
+            token = extractTokenFromCookies(request); // Nếu không có trong session, kiểm tra cookie
+        }
+
+        // Nếu không tìm thấy token, người dùng chưa đăng nhập
+        if (token == null || token.isEmpty()) {
+            return null;
+        }
+
+        // Trích xuất email từ token và tìm người dùng từ email
+        String email = jwtUtil.extractUsername(token);
+        if (email != null) {
+            try {
+                return userDAO.findByEmail(email);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return null; // Trả về null nếu không có thông tin người dùng
+    }
+
+    // Hàm hỗ trợ: Lấy token từ cookie
+    private String extractTokenFromCookies(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("jwt".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
+    }
 
     public void showLogin() throws Exception {
         String loginPage = "/frontend/login.jsp";
         servletUtil.forwardToPage(loginPage);
     }
-
-    public void doLogin() throws Exception {
-
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        String remember = request.getParameter("rememberMe");
-        Users user = userDAO.findByEmail(email);
-        boolean loginResult = false;
-
-        if (user != null) {
-            // So sánh mật khẩu nhập vào với mật khẩu đã mã hóa
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            loginResult = passwordEncoder.matches(password, user.getPassword());
-
-
-            if (loginResult) {
-            String token = jwtUtil.generateToken(email); // Tạo JWT
-            request.getSession().setAttribute("useremail", email);
-            request.getSession().setAttribute("token", token); // Lưu token vào session
-
-                HomePage homePage = new HomePage();
-                homePage.doGet(request, response);
-        } else {
-            String message = "Đăng nhập thất bại!";
-            request.setAttribute("message", message);
-            String messagePage = "/common/message.jsp";
-            servletUtil.forwardToPage(messagePage);
-            }
-        }
-    }
 }
+
