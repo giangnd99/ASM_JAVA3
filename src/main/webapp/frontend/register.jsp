@@ -35,7 +35,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng kí</p>
-                                <form action="create_user" method="POST" class="mx-1 mx-md-4">
+                                <form action="${pageContext.request.contextPath}/admin/create_user" method="POST" class="mx-1 mx-md-4">
 
                                     <!-- Tên của bạn -->
                                     <div class="form-outline mb-4">
@@ -54,18 +54,13 @@
                                         <h6>Giới Tính:</h6>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="gender"
-                                                   id="femaleGender" value="female" checked/>
+                                                   id="femaleGender" value="female"/>
                                             <label class="form-check-label" for="femaleGender">Nữ</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="gender"
                                                    id="maleGender" value="male"/>
                                             <label class="form-check-label" for="maleGender">Nam</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender"
-                                                   id="otherGender" value="other"/>
-                                            <label class="form-check-label" for="otherGender">Khác</label>
                                         </div>
                                     </div>
 

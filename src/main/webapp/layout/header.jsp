@@ -60,22 +60,31 @@
                 <button type="submit" class="btn btn-outline-light">Tìm</button>
             </form>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="view_news" class="nav-link">Tin Tức</a>
-                </li>
-                <li class="nav-item">
-                    <a href="login" class="nav-link">Đăng Nhập</a>
-                </li>
-                <li class="nav-item">
-                    <a href="register" class="nav-link">Đăng Ký</a>
-                </li>
+                <!-- Kiểm tra nếu người dùng chưa đăng nhập thì hiển thị Đăng nhập/Đăng ký -->
+                <c:if test="${loggedUser == null}">
+                    <li class="nav-item">
+                        <a href="login" class="nav-link">Đăng Nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="register" class="nav-link">Đăng Ký</a>
+                    </li>
+                </c:if>
+
+                <!-- Kiểm tra nếu người dùng đã đăng nhập -->
                 <c:if test="${loggedUser != null}">
                     <li class="nav-item">
-                        <a href="view_profile" class="nav-link">Xin Chào ${loggedUser.fullname}</a>
+                        <a href="view_profile" class="nav-link">Xin Chào, ${loggedUser.fullname}</a>
                     </li>
                     <li class="nav-item">
                         <a href="logout" class="nav-link">Đăng Xuất</a>
                     </li>
+
+                    <!-- Hiển thị ô Admin nếu người dùng có vai trò Admin -->
+                    <c:if test="${loggedUser.role == true}">
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/admin" class="nav-link">Admin</a>
+                        </li>
+                    </c:if>
                 </c:if>
             </ul>
         </div>
@@ -87,10 +96,9 @@
 <div class="container mb-4">
     <div class="row justify-content-center">
         <c:forEach var="cat" items="${listCategory}">
-        <div class="col-auto">
-            <a href="list_by_category?id=${cat.id}" class="category-link btn btn-outline-primary mx-1">${cat.name}</a>
-        </div>
+            <div class="col-auto">
+                <a href="list_by_category?id=${cat.id}" class="category-link btn btn-outline-primary mx-1">${cat.name}</a>
+            </div>
         </c:forEach>
     </div>
 </div>
-
