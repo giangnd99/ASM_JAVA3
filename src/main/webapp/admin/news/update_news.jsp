@@ -85,7 +85,7 @@
                     <label class="form-label">Tác giả</label>
                     <select class="form-select" name="author" required>
                         <c:forEach var="user" items="${listUser}">
-                            <option value="${user.id}" ${news != null && user.id == news.author ? 'selected' : ''}>${user.fullname}</option>
+                            <option value="${user.id}" ${user.id == news.author ? 'selected' : ''}>${user.fullname}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="home"
-                           name="home" ${news != null && news.home ? 'checked' : ''}>
+                           name="home" value="true" ${news.home ? 'checked' : ''}>
                     <label class="form-check-label" for="home">Hiển thị trên trang chủ</label>
                 </div>
 

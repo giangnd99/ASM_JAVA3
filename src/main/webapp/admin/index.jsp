@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
 <div class="container-lg">
     <div class="container mt-4">
         <div class="row">

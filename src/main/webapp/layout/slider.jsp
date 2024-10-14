@@ -2,11 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!-- Kiểm tra nếu danh sách latestNews không rỗng -->
-<c:if test="${not empty latestNews}">
+<c:if test="${not empty listByHome}">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <c:forEach var="news" items="${latestNews}" varStatus="status">
+            <c:forEach var="news" items="${listByHome}" varStatus="status">
                 <button type="button" data-bs-target="#carouselExampleDark"
                         data-bs-slide-to="${status.index}"
                         class="${status.first ? 'active' : ''}"
@@ -17,7 +16,7 @@
         </div>
         <!-- Carousel Items -->
         <div class="carousel-inner">
-            <c:forEach var="news" items="${latestNews}" varStatus="status">
+            <c:forEach var="news" items="${listByHome}" varStatus="status">
                 <div class="carousel-item ${status.first ? 'active' : ''}" data-bs-interval="10000">
                     <img src="${pageContext.request.contextPath}/images/${news.image}"
                          class="d-block w-100"

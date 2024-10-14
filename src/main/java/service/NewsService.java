@@ -12,6 +12,7 @@ import jakarta.servlet.http.Part;
 import model.Category;
 import model.News;
 import model.Users;
+import util.ServletUtil;
 import util.XImage;
 
 import java.io.File;
@@ -33,6 +34,7 @@ public class NewsService {
     private UserDAO userDAO;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private ServletUtil servletUtil;
 
     public NewsService(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
@@ -40,7 +42,7 @@ public class NewsService {
         newsDAO = new NewsDAO();
         categoryDAO = new CategoryDAO();
         userDAO = new UserDAO();
-
+        servletUtil = new ServletUtil(request, response);
     }
 
     public void listNews() throws Exception {
@@ -75,6 +77,7 @@ public class NewsService {
         getTop5Viewcount();
         getTop5LatestNews();
         getTop5CurrentUser();
+        getTopListByHome();
 
         if (message != null) {
             request.setAttribute("message", message);
@@ -123,6 +126,7 @@ public class NewsService {
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        boolean home = Boolean.parseBoolean(request.getParameter("home"));
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date postedDate;
 
@@ -135,6 +139,7 @@ public class NewsService {
 
         news.setTitle(title);
         news.setContent(content);
+        news.setHome(home);
         news.setPostedDate(postedDate);
 
         Integer categoryId = Integer.parseInt(request.getParameter("category_id"));
@@ -202,6 +207,10 @@ public class NewsService {
     public void viewNewsDetail() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Integer newsId = Integer.parseInt(request.getParameter("id"));
         News news = newsDAO.get(newsId);
+        Users users = getUserByNewsID(newsId);
+        List<Category> listCategory = categoryDAO.listAll();
+        request.setAttribute("listCategory", listCategory);
+        request.setAttribute("user", users);
         request.setAttribute("news", news);
         news.setViewCount(news.getViewCount() + 1); // Tăng số lần xem
         getRelatedNewsList();
@@ -276,6 +285,17 @@ public class NewsService {
         request.setAttribute("relatedNewsList", relatedNewsList);
     }
 
+    public void getTopListByHome() throws Exception {
+        List<News> list = newsDAO.findAll();
+        List<News> listByHome = new ArrayList<>();
+        for (News news : list) {
+            if (news.isHome()) {
+                listByHome.add(news);
+            }
+        }
+        request.setAttribute("listByHome", listByHome);
+    }
+
     public void getTop5CurrentUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<News> list = newsDAO.findAll();
         List<News> list5currentUser = new ArrayList<>();
@@ -290,4 +310,14 @@ public class NewsService {
         }
         request.setAttribute("list5currentUser", list5currentUser);
     }
+    public Users getUserByNewsID(Integer newsId) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        List<Users> usersList = userDAO.findAll();
+        for (Users user : usersList) {
+            if (newsId.equals(user.getId())) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 }

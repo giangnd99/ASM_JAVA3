@@ -41,7 +41,7 @@
 <div class="header-container">
     <div class="header-logo text-center">
         <a href="${pageContext.request.contextPath}/" class="text-decoration-none">
-            <h1 class="display-4 text-light">Báo Công Nghệ</h1>
+            <h1 class="display-4 text-light">Báo Đời</h1>
         </a>
     </div>
 </div>

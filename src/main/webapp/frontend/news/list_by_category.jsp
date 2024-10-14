@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,28 +34,39 @@
 <body>
 
 <!-- Include Header -->
-<jsp:include page="../../layout/header.jsp"></jsp:include>
+<jsp:include page="../../layout/header.jsp"/>
 
 <div class="container my-5">
     <!-- Category Title -->
     <div class="category-title text-center">
-        <h1>Tin tức trong danh mục: <span style="color: #007bff;">${categoryName}</span></h1>
+        <h1>Tin tức trong danh mục: <span style="color: #007bff;">${category.name}</span></h1>
     </div>
 
     <div class="row">
-        <%-- <c:forEach items="${categoryNewsList}" var="newsItem"> --%>
+        <c:forEach items="${listByCategory}" var="news">
         <!-- Example of one news item, repeated for each news in category -->
         <div class="col-md-4 mb-4">
             <div class="card news-card h-100 shadow-sm">
-                <img src="images/news-image.jpg" class="card-img-top news-image" alt="News Image">
+                <img src="images/${news.image}" class="card-img-top news-image" alt="News Image">
                 <div class="card-body">
-                    <h5 class="card-title">Tiêu đề bài báo</h5>
-                    <p class="news-description">Tóm tắt ngắn về bài báo, thông tin nổi bật và một số nội dung chính...</p>
-                    <a href="/news_detail?id=1" class="btn btn-primary">Xem thêm</a>
+                    <h5 class="card-title">${news.title}</h5>
+                    <p class="news-description">
+                            <c:set var="maxLength" value="100"/> <!-- Độ dài tối đa cho nội dung -->
+                        <c:choose>
+                        <c:when test="${fn:length(news.content) > maxLength}">
+                    <p class="text-light">
+                            ${fn:substring(news.content, 0, maxLength)}...
+                    </p>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="text-light">${news.content}</p>
+                    </c:otherwise>
+                    </c:choose></p>
+                    <a href="news_detail?id=${news.id}" class="btn btn-primary">Xem thêm</a>
                 </div>
             </div>
         </div>
-        <%-- </c:forEach> --%>
+        </c:forEach>
     </div>
 
     <!-- Pagination (if needed) -->
