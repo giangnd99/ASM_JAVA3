@@ -90,20 +90,33 @@ public class UserService {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        // Lấy người dùng từ DB
         Users userById = userDAO.get(userId);
 
+        // Kiểm tra xem email có bị trùng với người dùng khác không
         Users userByEmail = userDAO.findByEmail(email);
 
+        // Nếu password không trống và khác với password cũ thì mới mã hóa và cập nhật
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPassword = encoder.encode(password);
-        Users updatedUser = new Users();
-        readFields(request, updatedUser);
-        updatedUser.setId(userId);
-        updatedUser.setPassword(encodedPassword);
-        userDAO.update(updatedUser);
-        listUsers("Tài khoản được cập nhật thành công!!");
+        String encodedPassword = userById.getPassword(); // Giữ mật khẩu cũ
 
+        if (password != null && !password.isEmpty()) {
+            // Kiểm tra nếu mật khẩu mới khác với mật khẩu cũ (sau khi mã hóa)
+            if (!encoder.matches(password, userById.getPassword())) {
+                encodedPassword = encoder.encode(password);
+            }
+        }
+
+        // Cập nhật thông tin người dùng
+        Users updatedUser = new Users();
+        readFields(request, updatedUser); // Đọc các trường khác từ request (ngoại trừ mật khẩu)
+        updatedUser.setId(userId);
+        updatedUser.setPassword(encodedPassword); // Chỉ cập nhật mật khẩu nếu thay đổi
+        userDAO.update(updatedUser);
+
+        listUsers("Tài khoản được cập nhật thành công!!");
     }
+
 
     public void deleteUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         int userId = Integer.parseInt(request.getParameter("id"));

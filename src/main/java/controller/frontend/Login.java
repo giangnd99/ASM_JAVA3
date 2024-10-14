@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
             boolean loginSuccess = authService.login(request, response);
             if (loginSuccess) {
                 // Đăng nhập thành công, điều hướng đến trang chủ
-                response.sendRedirect("/");
+                response.sendRedirect(request.getContextPath() + "/");
             } else {
                 // Đăng nhập thất bại, điều hướng về trang thông báo lỗi
                 request.setAttribute("message", "Đăng nhập thất bại!");

@@ -26,6 +26,6 @@ public class LogOut extends HttpServlet {
             throws ServletException, IOException {
         authService.logout(request, response);
         // Sau khi đăng xuất, điều hướng về trang đăng nhập
-        response.sendRedirect("/");
+        response.sendRedirect(request.getContextPath() + "/");
     }
 }

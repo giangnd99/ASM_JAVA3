@@ -49,7 +49,7 @@
         <div class="row align-items-center">
             <!-- Left Section: Logo and Admin Information -->
             <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                <img src="../images/FPT_Polytechnic.png" alt="Admin Logo" class="mb-2" style="max-width: 150px;">
+                <img src="images/FPT_Polytechnic.png" alt="Admin Logo" class="mb-2" style="max-width: 150px;">
                 <p class="mb-1">Quản trị viên: <strong>Nguyễn Đằng Giang</strong></p>
                 <p class="mb-1">Quản lý trang tin điện tử Số </p>
                 <p class="mb-1">Thông tin liên hệ - Văn phòng quản lý</p>
@@ -70,9 +70,6 @@
                 <p class="mb-1">Địa chỉ: <strong>123 Đường ABC, P.4, Q.12, TP. Hồ Chí Minh</strong></p>
                 <p class="mb-1">Hotline: <strong>0987.654.321</strong> - Email: <strong>nguyendanggiang99@congnghe.com</strong></p>
                 <p class="mb-1">Hỗ trợ kỹ thuật: <strong>0123.456.789</strong></p>
-                <a href="register_admin" class="d-block mt-2 text-decoration-none">
-                    <button class="btn btn-primary">Đăng ký viết báo tại đây</button>
-                </a>
             </div>
         </div>
 

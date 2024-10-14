@@ -99,26 +99,31 @@
                 </thead>
                 <tbody>
                 <c:forEach var="news" items="${listNews}">
-                    <tr>
-                        <td>${news.id}</td>
-                        <td>${news.title}</td>
-                        <td><c:forEach var="user" items="${listUser}">
-                            <c:if test="${user.id == news.author}">
-                                ${user.fullname}
-                            </c:if>
-                        </c:forEach></td>
-                        <td><fmt:formatDate pattern='dd/MM/yyyy' value='${news.postedDate}'/></td>
-                        <td>${fn:substring(news.content, 0, 50)}...</td>
-                        <td class="text-center action-btns">
-                            <a href="update_news?id=${news.id}" class="btn btn-warning btn-sm">
-                                <i class="bi bi-pencil"></i> Sửa
-                            </a>
-                            <a href="delete_news?id=${news.id}" class="btn btn-danger btn-sm"
-                               onclick="return confirm('Bạn có chắc muốn xóa tin này?');">
-                                <i class="bi bi-trash"></i> Xóa
-                            </a>
-                        </td>
-                    </tr>
+                    <!-- Nếu người dùng là admin thì hiển thị tất cả, nếu không thì chỉ hiển thị tin tức của chính họ -->
+                    <c:if test="${loggedUser.role == true || loggedUser.id == news.author}">
+                        <tr>
+                            <td>${news.id}</td>
+                            <td>${news.title}</td>
+                            <td>
+                                <c:forEach var="user" items="${listUser}">
+                                    <c:if test="${user.id == news.author}">
+                                        ${user.fullname}
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td><fmt:formatDate pattern='dd/MM/yyyy' value='${news.postedDate}'/></td>
+                            <td>${fn:substring(news.content, 0, 50)}...</td>
+                            <td class="text-center action-btns">
+                                <a href="update_news?id=${news.id}" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil"></i> Sửa
+                                </a>
+                                <a href="delete_news?id=${news.id}" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bạn có chắc muốn xóa tin này?');">
+                                    <i class="bi bi-trash"></i> Xóa
+                                </a>
+                            </td>
+                        </tr>
+                    </c:if>
                 </c:forEach>
                 </tbody>
             </table>

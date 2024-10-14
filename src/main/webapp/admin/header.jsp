@@ -21,7 +21,7 @@
 
     .navbar-nav .nav-link {
         color: #fff;
-        font-size: 1.1rem;
+        font-size: 0.9rem;
         margin: 0 10px;
         transition: color 0.3s ease;
     }
@@ -63,23 +63,37 @@
             </form>
             <c:set var="baseUri" value="${pageContext.request.contextPath}/admin" />
             <ul class="navbar-nav ms-auto">
+                <!-- Hiển thị nếu loggedUser.role == true -->
+                <c:if test="${loggedUser.role == true}">
+                    <li class="nav-item">
+                        <a href="${baseUri}/list_newsletter" class="nav-link">Newsletter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${baseUri}/list_category" class="nav-link">Quản Lý Loại Tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${baseUri}/list_news" class="nav-link">Quản Lý Tin Tức</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${baseUri}/list_users" class="nav-link">Quản Lý Người Dùng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${baseUri}/list_reports" class="nav-link">Thống Kê</a>
+                    </li>
+                </c:if>
+
+                <!-- Luôn hiển thị Quản Lý Tin Tức -->
+                <c:if test="${loggedUser.role == false}">
+                    <li class="nav-item">
+                        <a href="${baseUri}/list_news" class="nav-link">Quản Lý Tin Tức</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}" class="nav-link">Trang chủ</a>
+                    </li>
+                </c:if>
+
                 <li class="nav-item">
-                    <a href="${baseUri}/list_newsletter" class="nav-link">Newsletter</a>
-                </li>
-                <li class="nav-item">
-                    <a href="${baseUri}/list_category" class="nav-link"> Quản Lý Loại Tin</a>
-                </li>
-                <li class="nav-item">
-                    <a href="${baseUri}/list_news" class="nav-link">Quản Lý Tin Tức</a>
-                </li>
-                <li class="nav-item">
-                    <a href="${baseUri}/list_users" class="nav-link">Quản Lý Người Dùng</a>
-                </li>
-                <li class="nav-item">
-                    <a href="${baseUri}/list_reports" class="nav-link">Thống Kê</a>
-                </li>
-                <li class="nav-item">
-                    <a href="logout" class="nav-link">Đăng Xuất</a>
+                    <a href="${pageContext.request.contextPath}/logout" class="nav-link">Đăng Xuất</a>
                 </li>
                 <c:if test="${loggedUser != null}">
                     <li class="nav-item">
@@ -90,4 +104,3 @@
         </div>
     </div>
 </nav>
-
