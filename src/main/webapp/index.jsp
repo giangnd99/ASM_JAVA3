@@ -213,25 +213,25 @@
                     </div>
                      </c:forEach>
                 </div>
-            </section>
-            <!-- Recently Viewed News Section -->
-            <%--            <section class="mb-5">--%>
-            <%--                <h2 class="text-center">Tin tức đã xem</h2>--%>
-            <%--                <div class="row">--%>
-            <%--                    <c:forEach items="${list5CurrentNews}" var="news">--%>
-            <%--                    <div class="col-md-12 mb-3">--%>
-            <%--                        <div class="card custom-card">--%>
-            <%--                            <img class="card-img-top" src="${pageContext.request.contextPath}/images/${news.image}/"--%>
-            <%--                                 alt="News Image" style="height: 80px;">--%>
-            <%--                            <div class="card-body">--%>
-            <%--                                <a href="news_detail?id=${news.id}" class="btn btn-primary"><h5 class="card-title">--%>
-            <%--                                        ${news.title}</h5></a>--%>
-            <%--                            </div>--%>
-            <%--                        </div>--%>
-            <%--                    </div>--%>
-            <%--                    </c:forEach>--%>
-            <%--                </div>--%>
-            <%--            </section>--%>
+<%--            </section>--%>
+<%--            <!-- Recently Viewed News Section -->--%>
+<%--                        <section class="mb-5">--%>
+<%--                            <h2 class="text-center">Tin tức đã xem</h2>--%>
+<%--                            <div class="row">--%>
+<%--                                <c:forEach items="${list5CurrentNews}" var="news">--%>
+<%--                                <div class="col-md-12 mb-3">--%>
+<%--                                    <div class="card custom-card">--%>
+<%--                                        <img class="card-img-top" src="${pageContext.request.contextPath}/images/${news.image}/"--%>
+<%--                                             alt="News Image" style="height: 80px;">--%>
+<%--                                        <div class="card-body">--%>
+<%--                                            <a href="news_detail?id=${news.id}" class="btn btn-primary"><h5 class="card-title">--%>
+<%--                                                    ${news.title}</h5></a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                </c:forEach>--%>
+<%--                            </div>--%>
+<%--                        </section>--%>
         </div>
     </div>
 </div>
