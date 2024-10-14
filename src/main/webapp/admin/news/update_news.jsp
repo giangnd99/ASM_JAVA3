@@ -66,11 +66,10 @@
 
                 <div class="mb-3">
                     <label class="form-label">Hình ảnh</label>
-                    <input type="file" class="form-control" name="image" value="${news.image}">
-                    <c:if test="${news != null}">
+                    <input type="file" class="form-control" name="image">
                         <img id="thumbnail" alt="Image Preview" style="width:20%; margin-top: 10px"
-                             src="${pageContext.request.contextPath}/newsImages/${news.image}"/>
-                    </c:if>
+                             src="${pageContext.request.contextPath}/images/${news.image}"/>
+                    <p>Tệp hiện tại: ${news.image}</p>
                 </div>
 
                 <div class="mb-3">
