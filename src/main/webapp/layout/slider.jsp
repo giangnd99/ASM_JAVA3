@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- Kiểm tra nếu danh sách latestNews không rỗng -->
 <c:if test="${not empty latestNews}">
@@ -24,7 +25,17 @@
                          style="height: 500px;">
                     <div class="carousel-caption d-none d-md-block caption-bg">
                         <h5 class="text-white">${news.title}</h5>
-                        <p class="text-light">${news.content}</p>
+                        <c:set var="maxLength" value="100"/> <!-- Độ dài tối đa cho nội dung -->
+                        <c:choose>
+                            <c:when test="${fn:length(news.content) > maxLength}">
+                                <p class="text-light">
+                                        ${fn:substring(news.content, 0, maxLength)}...
+                                </p>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="text-light">${news.content}</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </c:forEach>

@@ -35,7 +35,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng kí</p>
-                                <form action="Register" method="POST" class="mx-1 mx-md-4">
+                                <form action="create_user" method="POST" class="mx-1 mx-md-4">
 
                                     <!-- Tên của bạn -->
                                     <div class="form-outline mb-4">
@@ -86,13 +86,6 @@
                                         <label class="form-label" for="form3Example4c">Mật khẩu</label>
                                         <input type="password" id="form3Example4c" class="form-control" name="password"/>
                                     </div>
-
-                                    <!-- Nhập lại mật khẩu -->
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="form3Example4cd">Nhập lại mật khẩu</label>
-                                        <input type="password" id="form3Example4cd" class="form-control" name="repeat_password"/>
-                                    </div>
-
                                     <!-- Điều khoản dịch vụ -->
                                     <div class="form-check d-flex justify-content-center mb-5">
                                         <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" name="checkbox"/>

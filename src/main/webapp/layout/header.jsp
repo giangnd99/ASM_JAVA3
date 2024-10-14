@@ -74,9 +74,6 @@
                         <a href="view_profile" class="nav-link">Xin Chào ${loggedUser.fullname}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="view_orders" class="nav-link">Tin Tức Của Tôi</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="logout" class="nav-link">Đăng Xuất</a>
                     </li>
                 </c:if>
@@ -89,21 +86,11 @@
 <!-- Categories Section -->
 <div class="container mb-4">
     <div class="row justify-content-center">
+        <c:forEach var="cat" items="${listCategory}">
         <div class="col-auto">
-            <a href="view_category?id=1" class="category-link btn btn-outline-primary mx-1">Java</a>
+            <a href="list_by_category?id=${cat.id}" class="category-link btn btn-outline-primary mx-1">${cat.name}</a>
         </div>
-        <div class="col-auto">
-            <a href="view_category?id=2" class="category-link btn btn-outline-primary mx-1">Java Frameworks</a>
-        </div>
-        <div class="col-auto">
-            <a href="view_category?id=3" class="category-link btn btn-outline-primary mx-1">Spring Framework</a>
-        </div>
-        <div class="col-auto">
-            <a href="view_category?id=4" class="category-link btn btn-outline-primary mx-1">Hibernate</a>
-        </div>
-        <div class="col-auto">
-            <a href="view_category?id=5" class="category-link btn btn-outline-primary mx-1">Microservices</a>
-        </div>
+        </c:forEach>
     </div>
 </div>
 

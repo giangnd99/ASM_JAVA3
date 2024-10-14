@@ -54,7 +54,7 @@
     <!-- Tiêu đề và nút Thêm Người Dùng -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="header-title">Danh sách người dùng</h1>
-        <a href="add_user.jsp" class="btn btn-primary-custom btn-lg">+ Thêm người dùng</a>
+        <a href="${pageContext.request.contextPath}/admin/create_user" class="btn btn-primary-custom btn-lg">+ Thêm người dùng</a>
     </div>
 
     <!-- Bảng danh sách người dùng -->
