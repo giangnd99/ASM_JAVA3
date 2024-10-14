@@ -70,8 +70,8 @@
         <h1 class="header-title">Danh Sách Danh Mục</h1>
 
         <!-- Form để nhập tên category và thêm category -->
-        <form action="create_category.jsp" method="post" class="form-inline-custom">
-            <input type="text" class="form-control me-2" placeholder="Nhập tên danh mục" name="categoryName" required>
+        <form action="create_category" method="post" class="form-inline-custom">
+            <input type="text" class="form-control me-2" placeholder="Nhập tên danh mục" name="name" required>
             <button type="submit" class="btn create-category-btn btn-lg">Thêm Danh Mục</button>
         </form>
     </div>
