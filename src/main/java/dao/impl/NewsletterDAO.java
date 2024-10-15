@@ -25,7 +25,7 @@ public class NewsletterDAO extends GenericDAO<NewsLetter> implements InterfaceDA
 
     @Override
     public NewsLetter update(NewsLetter newsLetter) {
-        String sql = "UPDATE newsletter SET enable = ? WHERE email = ?";
+        String sql = "UPDATE newsletter SET enabled = ? WHERE email = ?";
         XJdbc.update(sql, newsLetter.isEnabled(), newsLetter.getEmail());
         return newsLetter;
     }

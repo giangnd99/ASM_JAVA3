@@ -182,7 +182,7 @@
                 <h2 class="text-center">Tin tức gần đây</h2>
                 <div class="row">
                     <%-- Loop for recent news --%>
-                        <c:forEach items="${list5currentUser}" var="news">
+                        <c:forEach items="${listCurrentUser}" var="news">
                     <div class="col-md-12 mb-3">
                         <div class="card custom-card">
                             <img class="card-img-top" src="${pageContext.request.contextPath}/images/${news.image}"

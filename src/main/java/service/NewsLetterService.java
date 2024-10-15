@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsLetterService {
@@ -65,8 +64,7 @@ public class NewsLetterService {
         }
 
         NewsLetter newNewsletter = new NewsLetter();
-        readNewsletterFields(newNewsletter);
-
+        newNewsletter.setEmail(email);
         NewsLetter createdNewsletter = newsletterDAO.create(newNewsletter);
 
         if (createdNewsletter.getEmail() != null) {
@@ -75,27 +73,8 @@ public class NewsLetterService {
         }
     }
 
-    public void readNewsletterFields(NewsLetter newsletter) throws ServletException, IOException {
-        String title = request.getParameter("email");
-        boolean content = Boolean.parseBoolean(request.getParameter("enable"));
-
-        newsletter.setEmail(title);
-        newsletter.setEnabled(content);
-    }
-
-    public void editNewsletter() throws Exception {
-        String email = request.getParameter("email");
-        NewsLetter newsletter = newsletterDAO.findByEmail(email);
-
-        request.setAttribute("newsletter", newsletter);
-
-        String editPage = "newsletter_form.jsp";
-        servletUtil.forwardToPage(editPage);
-    }
-
-    public void updateNewsletter() throws Exception {
-        String email = request.getParameter("email");
-        String enable = request.getParameter("enable");
+    public void updateNewsletter(boolean enable) throws Exception {
+        String email = request.getParameter("id");
 
         NewsLetter existNewsletter = newsletterDAO.findByEmail(email);
 
@@ -104,8 +83,8 @@ public class NewsLetterService {
             listNewsletters(message);
             return;
         }
-
-        readNewsletterFields(existNewsletter);
+        existNewsletter.setEmail(email);
+        existNewsletter.setEnabled(enable);
         newsletterDAO.update(existNewsletter);
 
         String message = "Cập nhật email mới thành công.";

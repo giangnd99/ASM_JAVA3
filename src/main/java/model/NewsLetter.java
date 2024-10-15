@@ -13,5 +13,5 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class NewsLetter implements Serializable {
     private String email;
-    private boolean enabled;
+    private boolean enabled = true;
 }

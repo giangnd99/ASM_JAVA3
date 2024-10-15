@@ -49,7 +49,7 @@
         <div class="row align-items-center">
             <!-- Left Section: Logo and Admin Information -->
             <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                <img src="images/FPT_Polytechnic.png" alt="Admin Logo" class="mb-2" style="max-width: 150px;">
+                <img src="${pageContext.request.contextPath}/images/FPT_Polytechnic.png" alt="Admin Logo" class="mb-2" style="max-width: 150px;">
                 <p class="mb-1">Quản trị viên: <strong>Nguyễn Đằng Giang</strong></p>
                 <p class="mb-1">Quản lý trang tin điện tử Số </p>
                 <p class="mb-1">Thông tin liên hệ - Văn phòng quản lý</p>
