@@ -128,6 +128,15 @@ public class NewsService {
 
         if (createdNews.getId() > 0) {
             String message = "Tin tức rất hay đã được đăng lên thành công.";
+            String scheme = request.getScheme();                       // Lấy giao thức (http hoặc https)
+            String serverName = request.getServerName();               // Lấy tên máy chủ (domain hoặc IP)
+            int serverPort = request.getServerPort();                  // Lấy cổng server (ví dụ: 8080)
+            String contextPath = request.getContextPath();             // Lấy context path của ứng dụng
+            String newsId = String.valueOf(createdNews.getId());       // Lấy ID của bài viết vừa tạo
+            // Xây dựng URL đầy đủ
+            String articleUrl = scheme + "://" + serverName + ":" + serverPort + contextPath + "/news-detail?id=" + newsId;
+            System.out.println(articleUrl);
+            newsLetterService.sendNewsPost(title,articleUrl);
             listNews(message);
         }
     }
