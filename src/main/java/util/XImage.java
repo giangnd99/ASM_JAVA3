@@ -30,7 +30,7 @@ public class XImage {
             throw new IOException("Tên tệp không hợp lệ");
         }
         String localDirectory = "webapp/images";
-        localDirectory = createDirectory(localDirectory).getAbsolutePath();
+        localDirectory = createDirectory(localDirectory).getPath();
         createDirectory(saveDirectory);
 
         // Đảm bảo thư mục tồn tại trước khi lưu
