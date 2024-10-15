@@ -36,6 +36,7 @@ public class XImage {
         // Đảm bảo thư mục tồn tại trước khi lưu
         File destFile = new File(saveDirectory + File.separator + fileName);
         File localFile = new File(localDirectory + File.separator + fileName);
+        System.out.println(localFile.getAbsolutePath());
         try (InputStream inputStream = part.getInputStream()) {
             Files.copy(inputStream, destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             Files.copy(inputStream, localFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
