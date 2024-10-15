@@ -224,6 +224,11 @@ public class NewsService {
     public void viewNewsDetail() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Integer newsId = Integer.parseInt(request.getParameter("id"));
         News news = newsDAO.get(newsId);
+        List<Category> listCat = categoryDAO.listAll();
+        Users currentUser = getUserByNewsId(newsId);
+
+        request.setAttribute("user", currentUser);
+        request.setAttribute("listCategory", listCat);
         request.setAttribute("news", news);
         news.setViewCount(news.getViewCount() + 1); // Tăng số lần xem
         getRelatedNewsList();
@@ -319,5 +324,20 @@ public class NewsService {
             }
         }
         request.setAttribute("listCurrentUser", listCurrentUser);
+    }
+
+    public Users getUserByNewsId(Integer id) {
+        List<Users> users = null;
+        try {
+            users = userDAO.findAll();
+            for (Users user : users) {
+                if (user.getId().equals(id)) {
+                    return user;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }

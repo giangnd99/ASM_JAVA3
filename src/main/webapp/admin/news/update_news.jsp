@@ -58,7 +58,6 @@
                     <label class="form-label">Lượt xem</label>
                     <input type="number" class="form-control" name="viewCount" value="${news.viewCount}" required>
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label">Nội dung</label>
                     <textarea class="form-control" name="content" rows="20" required>${news.content}</textarea>
