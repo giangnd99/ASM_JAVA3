@@ -79,6 +79,12 @@ public class NewsService {
         request.setAttribute("listCategory", listCategory);
         getTop5Viewcount();
         getTop5LatestNews();
+        getListByHome();
+        Users loggedUser = (Users) request.getSession().getAttribute("loggedUser");
+        if (loggedUser != null) {
+            getListCurrentUser(loggedUser.getId());
+        }
+
         String newsIdParam = request.getParameter("id");
         if (newsIdParam != null && !newsIdParam.isEmpty()) {
             viewNewsDetail();
@@ -131,6 +137,7 @@ public class NewsService {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        boolean home = Boolean.parseBoolean(request.getParameter("home"));
         Date postedDate;
 
         try {
@@ -143,6 +150,7 @@ public class NewsService {
         news.setTitle(title);
         news.setContent(content);
         news.setPostedDate(postedDate);
+        news.setHome(home);
 
         Integer categoryId = Integer.parseInt(request.getParameter("category_id"));
         Category category = categoryDAO.get(categoryId);
@@ -152,7 +160,7 @@ public class NewsService {
         news.setAuthor(authorId);
 
         // Xử lý ảnh, nếu cần
-        File fileSaveDir = new File(request.getServletContext().getRealPath("/newsImages"));
+        File fileSaveDir = new File(request.getServletContext().getRealPath("/images"));
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
         }
@@ -280,5 +288,27 @@ public class NewsService {
         News news = newsDAO.get(newsId);
         List<News> relatedNewsList = newsDAO.findByCategory(news.getCategoryId());
         request.setAttribute("relatedNewsList", relatedNewsList);
+    }
+
+    public void getListByHome() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        List<News> list = newsDAO.findAll();
+        List<News> listByHome = new ArrayList<>();
+        for (News news : list) {
+            if (news.isHome()) {
+                listByHome.add(news);
+            }
+        }
+        request.setAttribute("listByHome", listByHome);
+    }
+
+    public void getListCurrentUser(Integer userId) throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        List<News> list = newsDAO.findAll();
+        List<News> listCurrentUser = new ArrayList<>();
+        for (News news : list) {
+            if (news.getAuthor().equals(userId)) {
+                listCurrentUser.add(news);
+            }
+        }
+        request.setAttribute("listCurrentUser", listCurrentUser);
     }
 }

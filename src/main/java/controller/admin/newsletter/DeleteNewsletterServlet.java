@@ -9,14 +9,14 @@ import service.NewsLetterService;
 
 import java.io.IOException;
 
-@WebServlet("/admin/update_newsletter")
-public class UpdateNewsletterServlet extends HttpServlet {
+@WebServlet("/admin/delete_newsletter")
+public class DeleteNewsletterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         NewsLetterService newsLetterService = new NewsLetterService(req, resp);
         try {
-            newsLetterService.updateNewsletter(true);
+            newsLetterService.updateNewsletter(false);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

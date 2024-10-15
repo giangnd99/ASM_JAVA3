@@ -65,10 +65,11 @@
 <jsp:include page="../header.jsp"></jsp:include>
 
 <div class="container-lg mt-5">
+    <c:set var="baseUri" value="${pageContext.request.contextPath}/admin"/>
     <!-- Title Section with Create Form -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="header-title">List Newsletter</h1>
-        <form action="create_newsletter.jsp" method="post" class="form-inline-custom">
+        <form action="${baseUri}/create_newsletter" method="POST" class="form-inline-custom">
             <input type="text" class="form-control me-2" placeholder="Nhập email" name="email" required>
             <button type="submit" class="btn create-category-btn btn-lg">Thêm Newsletter</button>
         </form>
@@ -91,10 +92,10 @@
                     <td>${newsletters.email}</td>
                     <td>${newsletters.enabled ?'Đăng kí':'Đã hủy'}</td>
                     <td class="text-center action-btns">
-                        <a href="edit_newsletter?${newsletters.email}" class="btn btn-warning btn-sm">
+                        <a href="${baseUri}/update_newsletter?id=${newsletters.email}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil"></i> Sửa
                         </a>
-                        <a href="edit_newsletter?${newsletters.email}" class="btn btn-danger btn-sm">
+                        <a href="${baseUri}/delete_newsletter?id=${newsletters.email}" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Xóa
                         </a>
                     </td>

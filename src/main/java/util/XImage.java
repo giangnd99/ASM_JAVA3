@@ -15,11 +15,12 @@ import java.util.List;
 public class XImage {
 
     // Tạo thư mục nếu chưa tồn tại
-    public static void createDirectory(String directoryPath) {
+    public static File createDirectory(String directoryPath) {
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdirs();
         }
+        return directory;
     }
 
     // Lưu file đơn vào thư mục đã chỉ định
@@ -28,10 +29,16 @@ public class XImage {
         if (fileName == null || fileName.isEmpty()) {
             throw new IOException("Tên tệp không hợp lệ");
         }
-        createDirectory(saveDirectory);  // Đảm bảo thư mục tồn tại trước khi lưu
+        String localDirectory = "webapp/images";
+        localDirectory = createDirectory(localDirectory).getAbsolutePath();
+        createDirectory(saveDirectory);
+
+        // Đảm bảo thư mục tồn tại trước khi lưu
         File destFile = new File(saveDirectory + File.separator + fileName);
+        File localFile = new File(localDirectory + File.separator + fileName);
         try (InputStream inputStream = part.getInputStream()) {
             Files.copy(inputStream, destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(inputStream, localFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new IOException("Lỗi khi lưu tệp: " + fileName, e);
         }
