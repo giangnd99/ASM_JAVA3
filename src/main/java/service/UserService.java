@@ -100,7 +100,7 @@ public class UserService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = userById.getPassword(); // Giữ mật khẩu cũ
 
-        if (password != null && !password.isEmpty()) {
+        if (password != null && !password.isEmpty() && !password.equals(encodedPassword)) {
             // Kiểm tra nếu mật khẩu mới khác với mật khẩu cũ (sau khi mã hóa)
             if (!encoder.matches(password, userById.getPassword())) {
                 encodedPassword = encoder.encode(password);
