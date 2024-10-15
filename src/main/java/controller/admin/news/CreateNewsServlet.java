@@ -32,6 +32,7 @@ public class CreateNewsServlet extends HttpServlet {
 
         try {
             newsService.createNews();
+
         } catch (Exception e) {
             throw new RuntimeException("Error when create news" + e, e.getCause());
         }

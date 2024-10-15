@@ -68,7 +68,7 @@
     <!-- Title Section with Create Form -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="header-title">List Newsletter</h1>
-        <form action="create_newsletter.jsp" method="post" class="form-inline-custom">
+        <form action="${pageContext.request.contextPath}/admin/create_newsletter" method="post" class="form-inline-custom">
             <input type="text" class="form-control me-2" placeholder="Nhập email" name="email" required>
             <button type="submit" class="btn create-category-btn btn-lg">Thêm Newsletter</button>
         </form>

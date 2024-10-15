@@ -3,10 +3,12 @@ package util;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 public class EmailUtil {
-    public static void sendEmail(String toEmail, String subject, String body) {
+    public static void sendEmail(String toEmail, String subject, String body) throws UnsupportedEncodingException {
         final String fromEmail = "havulam1998@gmail.com";
         final String password = "pmxt frut kbfb yjfv";
         Properties properties = new Properties();
@@ -24,8 +26,8 @@ public class EmailUtil {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject(subject);
-            message.setText(body);
+            message.setSubject(MimeUtility.encodeText(subject, "utf-8", "B"));
+            message.setContent(body, "text/html; charset=UTF-8");
 
             Transport.send(message);
 

@@ -9,6 +9,7 @@ import util.EmailUtil;
 import util.ServletUtil;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -111,7 +112,7 @@ public class NewsLetterService {
         listNewsletters(message);
     }
 
-    public void sendNewsPost(String postTitle, String postUrl) throws SQLException {
+    public void sendNewsPost(String postTitle, String postUrl) throws SQLException, UnsupportedEncodingException {
         List<NewsLetter> enabledSubscribers = newsletterDAO.findAllEnabledSubscribers();
         for (NewsLetter subscriber : enabledSubscribers) {
             if (subscriber.isEnabled()) {
