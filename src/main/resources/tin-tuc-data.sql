@@ -24,12 +24,13 @@ CREATE TABLE users (
 
 -- Insert users data
 INSERT INTO users (id, email, password, fullname, birthday, phone, gender, role)
-VALUES 
-(1, 'giang@java3.com', 'giang1999', 'Nguyễn Đằng Giang', '1999-09-09', '0779755739', true, true),
-(2, 'hung@gmail.com', 'hung123', 'Nguyễn Phan Lâm Hùng', '1999-01-01', '0123423891', true, false),
-(3, 'haithach@gmail.com', 'haithach', 'Nguyễn Dung Hải Thạch', '2002-01-01', '0234158931', true, false),
-(4, 'diepminh@gmail.com', 'minh123', 'Diệp Minh', '2000-01-01', '0345239819', true, false),
-(5, 'lamha@gmail.com', 'lam123', 'Hà Vũ Lâm', '1998-01-01', '0981389123', true, false);		
+VALUES
+(1,'giang@java3.com','giang1999','Nguyễn Đằng Giang','1999-09-09','0779755739',true,true),
+(2,'hung@gmail.com','hung123','Nguyễn Phan Lâm Hùng','1999-01-01','0123423891', true,false),
+(3,'haithach@gmail.com','haithach','Nguyễn Dung Hải Thạch','2002-01-01','0234158931',true,false),
+(4,'diepminh@gmail.com','minh123','Diệp Minh','2000-01-01','0345239819',true,false),
+(5,'lamha@gmail.com','lam123','Hà Vũ Lâm','1998-01-01','0981389123',true,false);
+
 
 -- Table: category
 CREATE TABLE category (

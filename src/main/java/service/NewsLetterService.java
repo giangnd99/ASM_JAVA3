@@ -5,9 +5,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.NewsLetter;
+import util.EmailUtil;
 import util.ServletUtil;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsLetterService {
@@ -105,5 +109,17 @@ public class NewsLetterService {
 
         String message = "Cập nhật email mới thành công.";
         listNewsletters(message);
+    }
+
+    public void sendNewsPost(String postTitle, String postUrl) throws SQLException {
+        List<NewsLetter> enabledSubscribers = newsletterDAO.findAllEnabledSubscribers();
+        for (NewsLetter subscriber : enabledSubscribers) {
+            if (subscriber.isEnabled()) {
+                String subject = "Bài viết mới" +  postTitle;
+                String body = "Xin chào,\n\nCó một bài viết mới trên trang web của chúng tôi: " + postTitle + "\n\n" +
+                        "Bạn có thể đọc bài viết tại đây: " + postUrl + "\n\nCảm ơn bạn đã quan tâm!";
+                EmailUtil.sendEmail(subscriber.getEmail(), subject, body);
+            }
+        }
     }
 }

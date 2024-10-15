@@ -36,6 +36,7 @@ public class NewsService {
     private HttpServletResponse response;
     private ServletUtil servletUtil;
 
+    private  NewsLetterService newsLetterService;
     public NewsService(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
@@ -43,6 +44,8 @@ public class NewsService {
         categoryDAO = new CategoryDAO();
         userDAO = new UserDAO();
         servletUtil = new ServletUtil(request, response);
+        newsLetterService = new NewsLetterService(request, response);
+
     }
 
     public void listNews() throws Exception {
@@ -76,13 +79,14 @@ public class NewsService {
         request.setAttribute("listCategory", listCategory);
         getTop5Viewcount();
         getTop5LatestNews();
-        getTop5CurrentUser();
-        getTopListByHome();
-
+        String newsIdParam = request.getParameter("id");
+        if (newsIdParam != null && !newsIdParam.isEmpty()) {
+            viewNewsDetail();
+            return;
+        }
         if (message != null) {
             request.setAttribute("message", message);
         }
-
         String listPage = "/index.jsp";
         request.getRequestDispatcher(listPage).forward(request, response);
     }
@@ -126,7 +130,6 @@ public class NewsService {
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        boolean home = Boolean.parseBoolean(request.getParameter("home"));
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date postedDate;
 
@@ -139,7 +142,6 @@ public class NewsService {
 
         news.setTitle(title);
         news.setContent(content);
-        news.setHome(home);
         news.setPostedDate(postedDate);
 
         Integer categoryId = Integer.parseInt(request.getParameter("category_id"));
@@ -148,18 +150,16 @@ public class NewsService {
 
         int authorId = Integer.parseInt(request.getParameter("author"));
         news.setAuthor(authorId);
-        // Xử lý hình ảnh, nếu người dùng upload
+
+        // Xử lý ảnh, nếu cần
+        File fileSaveDir = new File(request.getServletContext().getRealPath("/newsImages"));
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdirs();
+        }
         Part part = request.getPart("image");
-        if (part != null && part.getSubmittedFileName() != null && !part.getSubmittedFileName().isEmpty()) {
-            // Lấy đường dẫn tới thư mục images trong webapp
-            String saveDirectory = request.getServletContext().getRealPath("/images"); // Trỏ tới thư mục images
-            // Đảm bảo thư mục tồn tại
-            File fileSaveDir = new File(saveDirectory);
-            if (!fileSaveDir.exists()) {
-                fileSaveDir.mkdirs();
-            }
-            // Lưu file vào thư mục và gán tên file vào đối tượng news
-            String fileName = XImage.saveFile(part, saveDirectory);
+        String fileName = part.getSubmittedFileName();
+        if (fileName != null && !fileName.isEmpty()) {
+            XImage.saveFile(part, fileSaveDir.getAbsolutePath());
             news.setImage(fileName);
         }
     }
@@ -207,10 +207,6 @@ public class NewsService {
     public void viewNewsDetail() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Integer newsId = Integer.parseInt(request.getParameter("id"));
         News news = newsDAO.get(newsId);
-        Users users = getUserByNewsID(newsId);
-        List<Category> listCategory = categoryDAO.listAll();
-        request.setAttribute("listCategory", listCategory);
-        request.setAttribute("user", users);
         request.setAttribute("news", news);
         news.setViewCount(news.getViewCount() + 1); // Tăng số lần xem
         getRelatedNewsList();
@@ -274,6 +270,7 @@ public class NewsService {
         request.setAttribute("latestNews", latestNews);
 
     }
+
     public void getTop5Viewcount() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<News> listTop5viewCount = newsDAO.findTop5MostViewed();
         request.setAttribute("listTop5viewCount", listTop5viewCount);
@@ -284,40 +281,4 @@ public class NewsService {
         List<News> relatedNewsList = newsDAO.findByCategory(news.getCategoryId());
         request.setAttribute("relatedNewsList", relatedNewsList);
     }
-
-    public void getTopListByHome() throws Exception {
-        List<News> list = newsDAO.findAll();
-        List<News> listByHome = new ArrayList<>();
-        for (News news : list) {
-            if (news.isHome()) {
-                listByHome.add(news);
-            }
-        }
-        request.setAttribute("listByHome", listByHome);
-    }
-
-    public void getTop5CurrentUser() throws ServletException, IOException, SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        List<News> list = newsDAO.findAll();
-        List<News> list5currentUser = new ArrayList<>();
-        Users loggedUser = (Users) request.getSession().getAttribute("loggedUser");
-        if (loggedUser != null) {
-            Integer loggedUserId = loggedUser.getId();
-            for (News news : list) {
-                if (news.getAuthor() == loggedUserId) {
-                    list5currentUser.add(news);
-                }
-            }
-        }
-        request.setAttribute("list5currentUser", list5currentUser);
-    }
-    public Users getUserByNewsID(Integer newsId) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        List<Users> usersList = userDAO.findAll();
-        for (Users user : usersList) {
-            if (newsId.equals(user.getId())) {
-                return user;
-            }
-        }
-        return null;
-    }
-
 }

@@ -29,6 +29,7 @@ public class CreateNewsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         NewsService newsService = new NewsService(req, resp);
+
         try {
             newsService.createNews();
         } catch (Exception e) {
